@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText etEmail, etPassword;
     private Button btnLogin;
     private Button btnRegister;
-    private static final String BASE_URL = "http://localhost";
-    private static final String AUTH_ENDPOINT = BASE_URL + "/auth";
+    private static final String BASE_URL = "http://192.168.1.19:80";
+    public static final String AUTH_ENDPOINT = BASE_URL + "/auth";
 
 
     @Override
