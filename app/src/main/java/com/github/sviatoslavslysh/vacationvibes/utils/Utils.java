@@ -1,4 +1,4 @@
-package com.github.sviatoslavslysh.vacationvibes.auth;
+package com.github.sviatoslavslysh.vacationvibes.utils;
 
 public class Utils {
     public Utils() {

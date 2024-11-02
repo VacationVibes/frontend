@@ -1,4 +1,4 @@
-package com.github.sviatoslavslysh.vacationvibes;
+package com.github.sviatoslavslysh.vacationvibes.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 

@@ -10,9 +10,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.github.sviatoslavslysh.vacationvibes.PreferencesManager;
+import com.github.sviatoslavslysh.vacationvibes.utils.PreferencesManager;
 import com.github.sviatoslavslysh.vacationvibes.R;
-import com.github.sviatoslavslysh.vacationvibes.ToastManager;
+import com.github.sviatoslavslysh.vacationvibes.utils.ToastManager;
+import com.github.sviatoslavslysh.vacationvibes.utils.Utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
