@@ -44,7 +44,12 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="login">Login</string>
-    <string name="password">password</string>
-    <string name="email">email</string>
+    <string name="password">Password</string>
+    <string name="email">Email address</string>
     <string name="register">Register</string>
+    <string name="sign_in">Sign in</string>
+    <string name="email_label">Email address</string>
+    <string name="password_label">Password</string>
+    <string name="set_sign_up">Dont have an account with us yet? Create one</string>
+    <string name="sign_in_label">Sign in</string>
 </resources>

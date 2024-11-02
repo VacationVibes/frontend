@@ -3,6 +3,6 @@
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="primaryColor">#6200EE</color> <!-- Add this line for primary color -->
+    <color name="primaryColor">#6200EE</color>
 
 </resources>

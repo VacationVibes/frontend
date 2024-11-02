@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="email" type="id" />
+    <item name="email_label" type="id" />
+    <item name="password" type="id" />
+    <item name="password_label" type="id" />
+    <item name="set_sign_up" type="id" />
+    <item name="sign_in" type="id" />
+    <item name="sign_in_label" type="id" />
+</resources>
