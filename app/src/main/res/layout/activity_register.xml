@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- email -->
+    <EditText
+        android:id="@+id/email_label"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="355dp"
+        android:autofillHints="emailAddress"
+        android:background="@drawable/email"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_vertical|start"
+        android:hint="@string/email_label"
+        android:inputType="textEmailAddress"
+        android:lineSpacingExtra="-2sp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textAppearance="@style/email_label" />
+
+
+    <!-- password -->
+    <EditText
+        android:id="@+id/password_label"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="413dp"
+        android:autofillHints="password"
+        android:background="@drawable/email"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_vertical|start"
+        android:hint="@string/password_label"
+        android:inputType="textPassword"
+        android:lineSpacingExtra="-2sp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textAppearance="@style/password_label" />
+
+
+    <!--    dont have account? sign up button-->
+    <TextView
+        android:id="@+id/set_login"
+        android:layout_width="300dp"
+        android:layout_height="22dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="471dp"
+        android:gravity="top"
+        android:lineSpacingExtra="2sp"
+        android:text="@string/set_login"
+        android:textAppearance="@style/set_sign_up"
+        android:translationY="-1.15sp" />
+
+    <!--    register button-->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/register"
+        android:layout_width="228dp"
+        android:layout_height="51dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/register"
+        android:gravity="center"
+        android:text="@string/register_label"
+        android:textAppearance="@style/register_label" />
+</RelativeLayout>

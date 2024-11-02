@@ -1,93 +1,93 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent">-->
+
+<!--    &lt;!&ndash; Email &ndash;&gt;-->
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/email"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_marginTop="355dp"-->
+<!--        android:background="@drawable/email">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/email_label"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:gravity="center_vertical|start"-->
+<!--            android:paddingStart="10dp"-->
+<!--            android:paddingEnd="10dp"-->
+<!--            android:lineSpacingExtra="-2sp"-->
+<!--            android:text="@string/email_label"-->
+<!--            android:textAppearance="@style/email_label" />-->
+<!--    </RelativeLayout>-->
+
+<!--    &lt;!&ndash; Password &ndash;&gt;-->
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/password"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_marginTop="413dp"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:background="@drawable/password">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/password_label"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:gravity="center_vertical|start"-->
+<!--            android:paddingStart="10dp"-->
+<!--            android:paddingEnd="10dp"-->
+<!--            android:lineSpacingExtra="-2sp"-->
+<!--            android:text="@string/password_label"-->
+<!--            android:textAppearance="@style/password_label" />-->
+<!--    </RelativeLayout>-->
+
+
+<!--    &lt;!&ndash;    dont have account? sign up button&ndash;&gt;-->
+<!--    <TextView-->
+<!--        android:id="@+id/set_sign_up"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="52dp"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_marginTop="471dp"-->
+<!--        android:gravity="top"-->
+<!--        android:lineSpacingExtra="2sp"-->
+<!--        android:text="@string/set_sign_up"-->
+<!--        android:textAppearance="@style/set_sign_up"-->
+<!--        android:translationY="-1.15sp" />-->
+
+<!--    &lt;!&ndash;    sign in button&ndash;&gt;-->
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/sign_in"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_width="228dp"-->
+<!--        android:layout_height="51dp"-->
+<!--        android:layout_marginBottom="60dp"-->
+<!--        android:background="@drawable/sign_in"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        >-->
+
+
+<!--        <TextView-->
+<!--            android:id="@+id/sign_in_label"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:gravity="center"-->
+<!--            android:text="@string/sign_in_label"-->
+<!--            android:textAppearance="@style/sign_in_label" />-->
+<!--    </RelativeLayout>-->
+<!--</RelativeLayout>-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <!-- Email -->
-    <RelativeLayout
-        android:id="@+id/email"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="355dp"
-        android:background="@drawable/email">
-
-        <TextView
-            android:id="@+id/email_label"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical|start"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:lineSpacingExtra="-2sp"
-            android:text="@string/email_label"
-            android:textAppearance="@style/email_label" />
-    </RelativeLayout>
-
-    <!-- Password -->
-    <RelativeLayout
-        android:id="@+id/password"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="413dp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/password">
-
-        <TextView
-            android:id="@+id/password_label"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical|start"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:lineSpacingExtra="-2sp"
-            android:text="@string/password_label"
-            android:textAppearance="@style/password_label" />
-    </RelativeLayout>
-
-
-    <!--    dont have account? sign up button-->
-    <TextView
-        android:id="@+id/set_sign_up"
-        android:layout_centerHorizontal="true"
-        android:layout_width="300dp"
-        android:layout_height="52dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="471dp"
-        android:gravity="top"
-        android:lineSpacingExtra="2sp"
-        android:text="@string/set_sign_up"
-        android:textAppearance="@style/set_sign_up"
-        android:translationY="-1.15sp" />
-
-    <!--    sign in button-->
-    <RelativeLayout
-        android:id="@+id/sign_in"
-        android:layout_centerHorizontal="true"
-        android:layout_width="228dp"
-        android:layout_height="51dp"
-        android:layout_marginBottom="60dp"
-        android:background="@drawable/sign_in"
-        android:gravity="center"
-        android:layout_alignParentBottom="true"
-        >
-
-
-        <TextView
-            android:id="@+id/sign_in_label"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/sign_in_label"
-            android:textAppearance="@style/sign_in_label" />
-    </RelativeLayout>
-</RelativeLayout>
-
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
 <!--    android:orientation="vertical"-->
 <!--    android:padding="24dp"-->
 <!--    android:gravity="center">-->
@@ -149,4 +149,4 @@
 <!--        android:text="@string/login"-->
 <!--        android:layout_marginTop="30dp"-->
 <!--        android:backgroundTint="@color/primaryColor"/>-->
-<!--</LinearLayout>-->
+</LinearLayout>

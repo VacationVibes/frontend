@@ -52,4 +52,6 @@
     <string name="password_label">Password</string>
     <string name="set_sign_up">Dont have an account with us yet? Create one</string>
     <string name="sign_in_label">Sign in</string>
+    <string name="register_label">Create account</string>
+    <string name="set_login">Already have an account? Sign in</string>
 </resources>
