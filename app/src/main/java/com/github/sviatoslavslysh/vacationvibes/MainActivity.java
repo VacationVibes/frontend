@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.sviatoslavslysh.vacationvibes.auth.LoginActivity;
+import com.github.sviatoslavslysh.vacationvibes.functionality.NavigationBarActivity;
 
 import org.json.JSONObject;
 
@@ -37,7 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (isLoggedIn) {
             // todo validate token
-            setContentView(R.layout.activity_main);
+            Intent intent = new Intent(this, NavigationBarActivity.class);
+            startActivity(intent);
+            finish();
         } else {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);

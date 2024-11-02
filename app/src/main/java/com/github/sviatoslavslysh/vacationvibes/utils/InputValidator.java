@@ -1,7 +1,7 @@
 package com.github.sviatoslavslysh.vacationvibes.utils;
 
-public class Utils {
-    public Utils() {
+public class InputValidator {
+    public InputValidator() {
 
     }
 

@@ -55,4 +55,7 @@
     <string name="register_label">Create account</string>
     <string name="set_login">Already have an account? Sign in</string>
     <string name="name_label">Name</string>
+    <string name="profile">Profile</string>
+    <string name="history">History</string>
+    <string name="home">Home</string>
 </resources>

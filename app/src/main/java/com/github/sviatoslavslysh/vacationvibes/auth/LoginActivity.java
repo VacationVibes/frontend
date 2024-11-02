@@ -10,10 +10,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.github.sviatoslavslysh.vacationvibes.functionality.NavigationBarActivity;
 import com.github.sviatoslavslysh.vacationvibes.utils.PreferencesManager;
 import com.github.sviatoslavslysh.vacationvibes.R;
 import com.github.sviatoslavslysh.vacationvibes.utils.ToastManager;
-import com.github.sviatoslavslysh.vacationvibes.utils.Utils;
+import com.github.sviatoslavslysh.vacationvibes.utils.InputValidator;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView switchToRegisterText;
     private PreferencesManager preferencesManager;
     private ExecutorService executorService;
-    private Utils utils;
+    private InputValidator inputValidator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.password_label);
 
         preferencesManager = new PreferencesManager(this);
-        utils = new Utils();
+        inputValidator = new InputValidator();
         executorService = Executors.newSingleThreadExecutor();
 
         loginButton = findViewById(R.id.sign_in);
@@ -60,11 +61,11 @@ public class LoginActivity extends AppCompatActivity {
     private void sendLoginRequest() {
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
-        if (!utils.isValidEmail(email)) {
+        if (!inputValidator.isValidEmail(email)) {
             ToastManager.showToast(this, "Please enter valid email address");
             return;
         }
-        if (!utils.isValidPassword(password)) {
+        if (!inputValidator.isValidPassword(password)) {
             ToastManager.showToast(this, "Password can not be shorter than 6 symbols");
             return;
         }
@@ -97,6 +98,9 @@ public class LoginActivity extends AppCompatActivity {
                         preferencesManager.setToken("Bearer " + jsonObject.getString("access_token"));
                     }
                     runOnUiThread(() -> ToastManager.showToast(getApplicationContext(), "login successful"));
+                    Intent intent = new Intent(this, NavigationBarActivity.class);
+                    startActivity(intent);
+                    finish();
 
                 } else if (response.code() == 422) {
                     assert response.body() != null;
