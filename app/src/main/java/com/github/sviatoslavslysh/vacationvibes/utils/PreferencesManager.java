@@ -22,6 +22,12 @@ public class PreferencesManager {
         editor.apply();
     }
 
+    public void removeToken() {
+        editor.remove(KEY_TOKEN);
+        editor.putBoolean(KEY_IS_LOGGED_IN, false);
+        editor.apply();
+    }
+
     public boolean isLoggedIn() {
         return sharedPreferences.getBoolean(KEY_IS_LOGGED_IN, false);
     }
