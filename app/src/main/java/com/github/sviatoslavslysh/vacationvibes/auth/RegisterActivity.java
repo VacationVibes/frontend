@@ -1,6 +1,5 @@
 package com.github.sviatoslavslysh.vacationvibes.auth;
 
-import static com.github.sviatoslavslysh.vacationvibes.MainActivity.AUTH_ENDPOINT;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +10,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.sviatoslavslysh.vacationvibes.functionality.NavigationBarActivity;
+import com.github.sviatoslavslysh.vacationvibes.model.AuthToken;
+import com.github.sviatoslavslysh.vacationvibes.repository.AuthRepository;
+import com.github.sviatoslavslysh.vacationvibes.utils.AuthCallback;
 import com.github.sviatoslavslysh.vacationvibes.utils.PreferencesManager;
 import com.github.sviatoslavslysh.vacationvibes.R;
 import com.github.sviatoslavslysh.vacationvibes.utils.ToastManager;
@@ -30,13 +32,14 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class RegisterActivity extends AppCompatActivity {
+    private EditText nameEditText;
     private EditText emailEditText;
     private EditText passwordEditText;
     private Button loginButton;
     private TextView switchToLoginText;
-    private PreferencesManager preferencesManager;
     private ExecutorService executorService;
     private InputValidator inputValidator;
+    private AuthRepository authRepository;
 
 
     @Override
@@ -44,13 +47,14 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        nameEditText = findViewById(R.id.name_label);
         emailEditText = findViewById(R.id.email_label);
         passwordEditText = findViewById(R.id.password_label);
         loginButton = findViewById(R.id.register);
         switchToLoginText = findViewById(R.id.set_login);
 
-        preferencesManager = new PreferencesManager(this);
         inputValidator = new InputValidator();
+        authRepository = new AuthRepository(new PreferencesManager(this));
         executorService = Executors.newSingleThreadExecutor();
 
         switchToLoginText.setOnClickListener(v -> switchToLogin());
@@ -58,6 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void sendRegisterRequest() {
+        String name = nameEditText.getText().toString().trim();
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
         if (!inputValidator.isValidEmail(email)) {
@@ -69,66 +74,22 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        OkHttpClient client = new OkHttpClient();
+        authRepository.register(email, password, name, new AuthCallback<AuthToken>() {
+            @Override
+            public void onSuccess(AuthToken authToken) {
+                // todo manage animations
+                ToastManager.showToast(RegisterActivity.this, "Registration successful!");
+                Intent intent = new Intent(RegisterActivity.this, NavigationBarActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                finish();
+            }
 
-        JSONObject payload = new JSONObject();
-        try {  // todo add name
-            payload.put("email", email);
-            payload.put("password", password);
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
-
-        RequestBody body = RequestBody.create(payload.toString(), MediaType.get("application/json; charset=utf-8"));
-
-        Request request = new Request.Builder()
-                .url(AUTH_ENDPOINT + "/register")
-                .post(body)
-                .addHeader("Accept", "application/json")
-                .build();
-
-        executorService.execute(() -> {
-            try (Response response = client.newCall(request).execute()) {
-                if (response.isSuccessful()) {
-                    JSONObject jsonObject = new JSONObject(response.body().string());
-                    System.out.println("Response: " + jsonObject);
-                    if (jsonObject.getString("token_type").equals("Bearer")) {
-                        preferencesManager.setToken("Bearer " + jsonObject.getString("access_token"));
-                    }
-                    runOnUiThread(() -> ToastManager.showToast(getApplicationContext(), "register successful"));
-                    Intent intent = new Intent(this, NavigationBarActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else if (response.code() == 422) {
-                    assert response.body() != null;
-                    JSONObject jsonObject = new JSONObject(response.body().string());
-                    runOnUiThread(() -> {
-                        try {
-                            ToastManager.showToast(getApplicationContext(), jsonObject.getJSONArray("detail").getJSONObject(0).getString("msg"));
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
-                    });
-                } else if (response.code() == 400) {  // normal error from backend
-                    assert response.body() != null;
-                    JSONObject jsonObject = new JSONObject(response.body().string());
-                    runOnUiThread(() -> {
-                        try {
-                            ToastManager.showToast(getApplicationContext(), jsonObject.getString("detail"));
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
-                    });
-                } else {
-                    runOnUiThread(() -> ToastManager.showToast(getApplicationContext(), "Unknown error\nStatus code: " + response.code()));
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                throw new RuntimeException(e);
+            @Override
+            public void onError(String errorMessage) {
+                ToastManager.showToast(RegisterActivity.this, errorMessage);
             }
         });
-
     }
 
     private void switchToLogin() {
