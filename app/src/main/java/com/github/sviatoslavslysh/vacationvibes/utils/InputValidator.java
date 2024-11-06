@@ -10,6 +10,11 @@ public class InputValidator {
     }
 
     public boolean isValidPassword(String password) {
-        return password.length() >= 6;
+        return password.length() >= 6 && password.length() <= 511;
     }
+
+    public boolean isValidName(String name) {
+        return name.length() >= 2 && name.length() <= 127;
+    }
+
 }

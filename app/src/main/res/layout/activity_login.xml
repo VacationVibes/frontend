@@ -1,7 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<!--    logo -->
+<!--    <ImageView-->
+<!--        android:id="@+id/vv_logo"-->
+<!--        android:layout_width="263dp"-->
+<!--        android:layout_height="269dp"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_marginTop="47dp"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:contentDescription="@string/vv_logo"-->
+<!--        android:src="@drawable/vv_logo" />-->
+
+    <!--    logo background -->
+    <ImageView
+        android:id="@+id/vv_logo_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="47dp"
+        android:contentDescription="@string/vv_logo"
+        android:src="@drawable/temp_logo_background" />
+
+    <!--    logo foreground -->
+    <ImageView
+        android:id="@+id/vv_logo_foreground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="73dp"
+        android:contentDescription="@string/vv_logo"
+        android:src="@drawable/temp_logo_foreground" />
 
     <!-- email -->
     <EditText
@@ -60,15 +94,25 @@
         android:translationY="-1.15sp" />
 
     <!--    sign in button-->
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/sign_in"
-        android:layout_width="228dp"
-        android:layout_height="51dp"
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="60dp"
-        android:background="@drawable/sign_in"
-        android:gravity="center"
-        android:text="@string/sign_in_label"
-        android:textAppearance="@style/sign_in_label" />
+        app:cardElevation="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="@android:color/transparent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/sign_in"
+            android:layout_width="228dp"
+            android:layout_height="51dp"
+            android:background="@drawable/sign_in"
+            android:gravity="center"
+            android:text="@string/sign_in_label"
+            android:textAppearance="@style/sign_in_label" />
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>
