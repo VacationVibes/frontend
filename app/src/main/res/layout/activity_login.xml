@@ -18,24 +18,24 @@
     <!--    logo background -->
     <ImageView
         android:id="@+id/vv_logo_background"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="263dp"
+        android:layout_height="269dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="47dp"
         android:contentDescription="@string/vv_logo"
-        android:src="@drawable/temp_logo_background" />
+        android:src="@drawable/vv_logo_background" />
 
     <!--    logo foreground -->
     <ImageView
         android:id="@+id/vv_logo_foreground"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="230dp"
+        android:layout_height="230dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="73dp"
+        android:layout_marginTop="70dp"
         android:contentDescription="@string/vv_logo"
-        android:src="@drawable/temp_logo_foreground" />
+        android:src="@drawable/vv_logo_foreground" />
 
     <!-- email -->
     <EditText
