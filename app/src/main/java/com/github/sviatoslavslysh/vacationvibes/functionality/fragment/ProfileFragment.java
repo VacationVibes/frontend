@@ -38,6 +38,7 @@ public class ProfileFragment extends Fragment {
         preferencesManager.removeToken();
         Intent intent = new Intent(this.requireContext(), MainActivity.class);
         startActivity(intent);
+        requireActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         requireActivity().finish();
     }
 }
