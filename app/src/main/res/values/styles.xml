@@ -42,4 +42,14 @@
         <item name="android:background">@drawable/sign_in</item>
     </style>
 
+    <style name="rounded_corners">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="location">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#E67240</item>
+        <item name="fontFamily">@font/orbitron_regular</item>
+    </style>
 </resources>

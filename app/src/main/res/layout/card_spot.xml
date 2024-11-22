@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/place"
+        android:layout_width="336dp"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:gravity="center_horizontal|top"
+        android:lineSpacingExtra="-10sp"
+        android:background="@color/white"
+        android:textAppearance="@style/location" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="100dp"
+        app:cardElevation="0dp">
+
+        <com.github.sviatoslavslysh.vacationvibes.utils.RoundRectCornerImageView
+            android:id="@+id/feed_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/feed_image"
+            android:scaleType="fitCenter" />
+
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="336dp"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:lineSpacingExtra="-10sp"
+        android:background="@color/white"
+        android:textAppearance="@style/location" />
+
+    <FrameLayout
+        android:id="@+id/left_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_height="275dp"
+            android:layout_width="275dp"
+            android:contentDescription="@string/dislike"
+            android:background="@drawable/cross_image"
+            android:layout_gravity="center">
+        </ImageView>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/right_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_height="275dp"
+            android:layout_width="275dp"
+            android:contentDescription="@string/dislike"
+            android:background="@drawable/tick_image"
+            android:layout_gravity="center">
+        </ImageView>
+    </FrameLayout>
+</RelativeLayout>

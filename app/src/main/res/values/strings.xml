@@ -60,4 +60,8 @@
     <string name="home">Home</string>
     <string name="logo_img">Logo image</string>
     <string name="vv_logo">Vacation Vibes logo</string>
+    <string name="feed_image">Feed image</string>
+    <string name="red_cross">Red cross</string>
+    <string name="green_tick">Green tick</string>
+    <string name="dislike">Dislike</string>
 </resources>
