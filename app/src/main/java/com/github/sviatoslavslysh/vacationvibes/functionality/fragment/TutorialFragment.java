@@ -26,5 +26,4 @@ public class TutorialFragment extends DialogFragment {
 
         return tutorial1.create();
     }
-
 }
