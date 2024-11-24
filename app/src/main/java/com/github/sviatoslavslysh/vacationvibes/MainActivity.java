@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         SharedPreferences preferences = getSharedPreferences("app_prefs", MODE_PRIVATE);
-        boolean isLoggedIn = preferences.getBoolean("is_logged_in", true); // changed
+        boolean isLoggedIn = preferences.getBoolean("is_logged_in", false);
 
         if (isLoggedIn) {
             // todo validate token
