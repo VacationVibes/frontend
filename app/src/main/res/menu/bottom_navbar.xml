@@ -3,13 +3,54 @@
     <item
         android:id="@+id/navigation_history"
         android:title="@string/history"
-        android:icon="@drawable/ic_history" />
+        android:icon="@drawable/history"
+        android:layout_width="45dp"
+        android:layout_height="19dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="115dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="823dp"
+        android:text="@string/history"
+        android:textAppearance="@style/history"
+        android:lineSpacingExtra="9sp"
+        android:translationY="-4.55sp"
+        android:gravity="center_horizontal|top"
+        android:fontFamily="@font/opensans"
+        />
+
+
     <item
         android:id="@+id/navigation_profile"
-        android:title="@string/profile"
-        android:icon="@drawable/ic_profile" />
+        android:title="@string/my_vibes"
+        android:icon="@drawable/profile"
+        android:layout_width="45dp"
+        android:layout_height="19dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="233dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="823dp"
+        android:text="@string/my_vibes"
+        android:textAppearance="@style/my_vibes"
+        android:lineSpacingExtra="9sp"
+        android:translationY="-4.55sp"
+        android:gravity="center_horizontal|top"
+        android:fontFamily="@font/opensans" />
+
     <item
         android:id="@+id/navigation_home"
         android:title="@string/home"
-        android:icon="@drawable/ic_home" />
+        android:icon="@drawable/home"
+        android:layout_width="45dp"
+        android:layout_height="19dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="174dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="823dp"
+        android:text="@string/home"
+        android:textAppearance="@style/home"
+        android:lineSpacingExtra="9sp"
+        android:translationY="-4.55sp"
+        android:gravity="center_horizontal|top"
+        android:fontFamily="@font/opensans" />
 </menu>
+
