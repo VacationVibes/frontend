@@ -44,6 +44,7 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.retrofit2.retrofit)
     implementation(libs.material.v160)
+    implementation(libs.material.tap.target.prompt)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
