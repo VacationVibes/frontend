@@ -7,6 +7,7 @@ public class PreferencesManager {
     private static final String PREFS_NAME = "app_prefs";
     private static final String KEY_IS_LOGGED_IN = "is_logged_in";
     private static final String KEY_TOKEN = "token";
+    private static final String FIRST_OPEN = "first_open";
 
     private final SharedPreferences sharedPreferences;
     private final SharedPreferences.Editor editor;
@@ -34,5 +35,14 @@ public class PreferencesManager {
 
     public String getToken() {
         return sharedPreferences.getString(KEY_TOKEN, null);
+    }
+
+    public boolean isFirstOpen() {
+        return sharedPreferences.getBoolean(FIRST_OPEN, true);
+    }
+
+    public void setFirstOpen(boolean firstOpen) {
+        editor.putBoolean(FIRST_OPEN, firstOpen);
+        editor.apply();
     }
 }

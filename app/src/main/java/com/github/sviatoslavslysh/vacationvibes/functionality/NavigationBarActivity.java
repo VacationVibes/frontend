@@ -2,6 +2,7 @@ package com.github.sviatoslavslysh.vacationvibes.functionality;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -12,17 +13,26 @@ import com.github.sviatoslavslysh.vacationvibes.R;
 import com.github.sviatoslavslysh.vacationvibes.functionality.fragment.HistoryFragment;
 import com.github.sviatoslavslysh.vacationvibes.functionality.fragment.HomeFragment;
 import com.github.sviatoslavslysh.vacationvibes.functionality.fragment.ProfileFragment;
+import com.github.sviatoslavslysh.vacationvibes.model.HomeViewModel;
+import com.github.sviatoslavslysh.vacationvibes.repository.PlaceRepository;
+import com.github.sviatoslavslysh.vacationvibes.utils.PreferencesManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
-import java.io.*;
 
-import java.io.File;
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
+
 
 public class NavigationBarActivity extends AppCompatActivity {
+    private PlaceRepository placeRepository;
+    private PreferencesManager preferencesManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navbar);
+
+        placeRepository = new PlaceRepository();
+        preferencesManager = new PreferencesManager(this);
+        new ViewModelProvider(this).get(HomeViewModel.class);
 
         BottomNavigationView navView = findViewById(R.id.navbar);
         navView.setOnItemSelectedListener(item -> {
@@ -41,22 +51,54 @@ public class NavigationBarActivity extends AppCompatActivity {
                     .commit();
             return true;
         });
-        // todo use PreferenceManager
-        File tutorialdone = new File(getCacheDir(),"tutorialcompleted");
-        if (!tutorialdone.exists()) {
-            MaterialTapTargetPrompt.Builder tutorial1 = new MaterialTapTargetPrompt.Builder(NavigationBarActivity.this);
-            tutorial1.setTarget(R.id.navigation_home);
-            tutorial1.setPrimaryText("Home Page");
-            tutorial1.setSecondaryText("This is the Home Page. this is sample text" +
-                    "i cant think of what to type here right now but i will fill it out later" +
-                    "test text");
-            MaterialTapTargetPrompt test = tutorial1.create();
-            test.show();
+
+        if (preferencesManager.isFirstOpen()) {
+            preferencesManager.setFirstOpen(false);
+
+            // todo the first tutorial to see must be tutorial on how to swipe
+
+            new MaterialTapTargetPrompt.Builder(NavigationBarActivity.this)
+                    .setTarget(R.id.navigation_home)
+                    .setPrimaryText("Feed")
+                    .setSecondaryText("See and swipe all locations we think are the best for you :)")
+                    .setPromptStateChangeListener((prompt, state1) -> {
+                        if (state1 == MaterialTapTargetPrompt.STATE_DISMISSED) {
+                            new MaterialTapTargetPrompt.Builder(NavigationBarActivity.this)
+                                    .setTarget(R.id.navigation_profile)
+                                    .setPrimaryText("Profile")
+                                    .setSecondaryText("See your data that we store and manage it")
+                                    .setPromptStateChangeListener((prompt1, state2) -> {
+                                        if (state2 == MaterialTapTargetPrompt.STATE_DISMISSED) {
+                                            new MaterialTapTargetPrompt.Builder(NavigationBarActivity.this)
+                                                    .setTarget(R.id.navigation_history)
+                                                    .setPrimaryText("History")
+                                                    .setSecondaryText("Accidentally swiped wrong location? You can find all of them here!")
+                                                    .setPromptStateChangeListener((prompt2, state3) -> {
+                                                        if (state3 == MaterialTapTargetPrompt.STATE_DISMISSED) {
+                                                            // todo get to the next button
+                                                            // User has pressed the prompt target
+                                                        }
+                                                    })
+                                                    .show();
+                                        }
+                                    })
+                                    .show();
+                        }
+                    })
+                    .show();
         }
 
         if (savedInstanceState == null) {
-            navView.setSelectedItemId(R.id.navigation_home); // Задайте активный элемент по умолчанию
+            navView.setSelectedItemId(R.id.navigation_home);
         }
+    }
+
+    public PlaceRepository getPlaceRepository() {
+        return placeRepository;
+    }
+
+    public PreferencesManager getPreferencesManager() {
+        return preferencesManager;
     }
 
 }

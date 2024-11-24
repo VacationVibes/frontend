@@ -47,8 +47,6 @@ public class HomeFragment extends Fragment implements CardStackListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-
-//        drawerLayout = rootView.findViewById(R.id.drawer_layout);
         homeViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
         placeRepository = ((NavigationBarActivity) requireActivity()).getPlaceRepository();
         preferencesManager = ((NavigationBarActivity) requireActivity()).getPreferencesManager();
@@ -57,7 +55,8 @@ public class HomeFragment extends Fragment implements CardStackListener {
             adapter = new CardStackAdapter(homeViewModel.getPlaces());
             manager = new CardStackLayoutManager(requireContext(), HomeFragment.this);
             setupCardStackView();
-        } else {
+        } else if (!homeViewModel.isAwaitingResponse()) {
+            // do nothing if already awaiting response on another (probably already hidden) activity
             loadPlaces();
         }
         return rootView;
@@ -86,32 +85,42 @@ public class HomeFragment extends Fragment implements CardStackListener {
     }
 
     private void loadPlaces() {
+        homeViewModel.setAwaitingResponse(true);
         placeRepository.getFeed(new PlaceCallback<List<Place>>() {
             @Override
             public void onSuccess(List<Place> places) {
-                // todo delete this toast
-                ToastManager.showToast(requireActivity(), "Retrieved places successfully!");
-                adapter = new CardStackAdapter(places);
-                manager = new CardStackLayoutManager(requireContext(), HomeFragment.this);
-                setupCardStackView();
-                homeViewModel.setPlaces(places);
+                homeViewModel.setAwaitingResponse(false);
+                if (isAdded()) {
+                    // todo delete this toast
+                    ToastManager.showToast(requireActivity(), "Retrieved places successfully!");
+                    adapter = new CardStackAdapter(places);
+                    manager = new CardStackLayoutManager(requireContext(), HomeFragment.this);
+                    setupCardStackView();
+                    homeViewModel.setPlaces(places);
+                }
             }
 
             @Override
             public void onError(String errorMessage) {
-                ToastManager.showToast(requireActivity(), errorMessage);
+                homeViewModel.setAwaitingResponse(false);
+                if (isAdded()) {
+                    ToastManager.showToast(requireActivity(), errorMessage);
+                }
             }
 
             @Override
             public void onInvalidAuth() {
-                ToastManager.showToast(requireActivity(), "Token expired");
-                preferencesManager.removeToken();
-                new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                    Intent intent = new Intent(requireContext(), MainActivity.class);
-                    startActivity(intent);
-                    requireActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    requireActivity().finish();
-                }, 200);
+                homeViewModel.setAwaitingResponse(false);
+                if (isAdded()) {
+                    ToastManager.showToast(requireActivity(), "Token expired");
+                    preferencesManager.removeToken();
+                    new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                        Intent intent = new Intent(requireContext(), MainActivity.class);
+                        startActivity(intent);
+                        requireActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                        requireActivity().finish();
+                    }, 200);
+                }
             }
         });
     }
