@@ -15,10 +15,11 @@ import com.github.sviatoslavslysh.vacationvibes.functionality.fragment.TutorialF
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.io.*;
 
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
+
 public class NavigationBarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        File tutorialdone = new File(getCacheDir(),"tutorialcompleted");
 //        if (!tutorialdone.exists()) {
 //            AlertDialog.Builder tutorial1 = new AlertDialog.Builder(NavigationBarActivity.this);
 //            tutorial1.setMessage("test");
@@ -48,6 +49,19 @@ public class NavigationBarActivity extends AppCompatActivity {
                     .commit();
             return true;
         });
+        File tutorialdone = new File(getCacheDir(),"tutorialcompleted");
+        if (!tutorialdone.exists()) {
+            MaterialTapTargetPrompt.Builder tutorial1 = new MaterialTapTargetPrompt.Builder(NavigationBarActivity.this);
+            tutorial1.setTarget(R.id.navigation_home);
+            tutorial1.setPrimaryText("Home Page");
+            tutorial1.setSecondaryText("This is the Home Page. this is sample text" +
+                    "i cant think of what to type here right now but i will fill it out later" +
+                    "test text");
+            MaterialTapTargetPrompt test = tutorial1.create();
+            test.show();
+        }
+
+
 
         if (savedInstanceState == null) {
             navView.setSelectedItemId(R.id.navigation_home); // Задайте активный элемент по умолчанию
