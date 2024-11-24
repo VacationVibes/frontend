@@ -35,12 +35,12 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
     public void onBindViewHolder(ViewHolder holder, int position) {
         Place place = places.get(position);
         holder.name.setText(place.getName());
-        holder.city.setText(place.getCity());
+        holder.location.setText("51  miles from you");  // todo calculate and show distance from user
         Glide.with(holder.image)
-                .load(place.getUrl())
+                .load(place.getImages().get(0).getImageUrl())
                 .into(holder.image);
         holder.itemView.setOnClickListener(v ->
-                Toast.makeText(v.getContext(), place.getName(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(v.getContext(), place.getId(), Toast.LENGTH_SHORT).show()
         );
     }
 
@@ -59,18 +59,18 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
     }
 
     public List<Place> getPlaces() {
-        return places;
+        return new ArrayList<>(places);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView name;
-        public final TextView city;
+        public final TextView location;
         public final ImageView image;
 
         public ViewHolder(View view) {
             super(view);
             name = view.findViewById(R.id.place);
-            city = view.findViewById(R.id.location);
+            location = view.findViewById(R.id.location);
             image = view.findViewById(R.id.feed_image);
         }
     }

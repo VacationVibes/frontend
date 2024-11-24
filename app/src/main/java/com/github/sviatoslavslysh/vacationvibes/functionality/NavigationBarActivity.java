@@ -4,18 +4,28 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.github.sviatoslavslysh.vacationvibes.R;
 import com.github.sviatoslavslysh.vacationvibes.functionality.fragment.HistoryFragment;
 import com.github.sviatoslavslysh.vacationvibes.functionality.fragment.HomeFragment;
 import com.github.sviatoslavslysh.vacationvibes.functionality.fragment.ProfileFragment;
+import com.github.sviatoslavslysh.vacationvibes.model.HomeViewModel;
+import com.github.sviatoslavslysh.vacationvibes.repository.PlaceRepository;
+import com.github.sviatoslavslysh.vacationvibes.utils.PreferencesManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class NavigationBarActivity extends AppCompatActivity {
+    private PlaceRepository placeRepository;
+    private PreferencesManager preferencesManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navbar);
+        placeRepository = new PlaceRepository();
+        preferencesManager = new PreferencesManager(this);
+        new ViewModelProvider(this).get(HomeViewModel.class);
 
         BottomNavigationView navView = findViewById(R.id.navbar);
         navView.setOnItemSelectedListener(item -> {
@@ -36,8 +46,15 @@ public class NavigationBarActivity extends AppCompatActivity {
         });
 
         if (savedInstanceState == null) {
-            navView.setSelectedItemId(R.id.navigation_home); // Задайте активный элемент по умолчанию
+            navView.setSelectedItemId(R.id.navigation_home);
         }
     }
 
+    public PlaceRepository getPlaceRepository() {
+        return placeRepository;
+    }
+
+    public PreferencesManager getPreferencesManager() {
+        return preferencesManager;
+    }
 }

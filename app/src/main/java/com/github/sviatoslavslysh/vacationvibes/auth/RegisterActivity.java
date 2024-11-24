@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -19,6 +18,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.github.sviatoslavslysh.vacationvibes.api.ApiClient;
 import com.github.sviatoslavslysh.vacationvibes.functionality.NavigationBarActivity;
 import com.github.sviatoslavslysh.vacationvibes.model.AuthToken;
 import com.github.sviatoslavslysh.vacationvibes.repository.AuthRepository;
@@ -44,12 +44,15 @@ public class RegisterActivity extends AppCompatActivity {
     private ImageView vv_logo_background;
     private ImageView vv_logo_foreground;
     private ValueAnimator rotationAnimator;
+    private PreferencesManager preferencesManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        preferencesManager = new PreferencesManager(this);
         nameEditText = findViewById(R.id.name_label);
         emailEditText = findViewById(R.id.email_label);
         passwordEditText = findViewById(R.id.password_label);
@@ -133,6 +136,9 @@ public class RegisterActivity extends AppCompatActivity {
         authRepository.register(email, password, name, new AuthCallback<AuthToken>() {
             @Override
             public void onSuccess(AuthToken authToken) {
+                preferencesManager.setToken(authToken.getAccessToken());
+                ApiClient.setAuthToken(authToken.getAccessToken());
+
                 // todo manage animations
                 stopAnimation();
                 ToastManager.showToast(RegisterActivity.this, "Registration successful!");

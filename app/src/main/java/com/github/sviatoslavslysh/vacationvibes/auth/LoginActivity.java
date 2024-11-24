@@ -4,12 +4,10 @@ package com.github.sviatoslavslysh.vacationvibes.auth;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -20,6 +18,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.github.sviatoslavslysh.vacationvibes.api.ApiClient;
 import com.github.sviatoslavslysh.vacationvibes.functionality.NavigationBarActivity;
 import com.github.sviatoslavslysh.vacationvibes.model.AuthToken;
 import com.github.sviatoslavslysh.vacationvibes.repository.AuthRepository;
@@ -28,19 +27,6 @@ import com.github.sviatoslavslysh.vacationvibes.utils.PreferencesManager;
 import com.github.sviatoslavslysh.vacationvibes.R;
 import com.github.sviatoslavslysh.vacationvibes.utils.ToastManager;
 import com.github.sviatoslavslysh.vacationvibes.utils.InputValidator;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -54,12 +40,14 @@ public class LoginActivity extends AppCompatActivity {
     private ImageView vv_logo_background;
     private ImageView vv_logo_foreground;
     private ValueAnimator rotationAnimator;
+    private PreferencesManager preferencesManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        preferencesManager = new PreferencesManager(this);
         emailEditText = findViewById(R.id.email_label);
         passwordEditText = findViewById(R.id.password_label);
         loginButtonCardView = findViewById(R.id.card_view_sign_in);
@@ -136,6 +124,9 @@ public class LoginActivity extends AppCompatActivity {
         authRepository.login(email, password, new AuthCallback<AuthToken>() {
             @Override
             public void onSuccess(AuthToken authToken) {
+                preferencesManager.setToken(authToken.getAccessToken());
+                ApiClient.setAuthToken(authToken.getAccessToken());
+
                 ToastManager.showToast(LoginActivity.this, "Login successful!");
                 new Handler(Looper.getMainLooper()).postDelayed(() -> {
                     Intent intent = new Intent(LoginActivity.this, NavigationBarActivity.class);

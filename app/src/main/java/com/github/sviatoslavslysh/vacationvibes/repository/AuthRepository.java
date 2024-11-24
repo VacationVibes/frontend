@@ -12,11 +12,10 @@ import com.github.sviatoslavslysh.vacationvibes.utils.PreferencesManager;
 import com.google.gson.Gson;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
 import androidx.annotation.NonNull;
-
+import retrofit2.Callback;
 import java.io.IOException;
 
 public class AuthRepository {
@@ -28,7 +27,7 @@ public class AuthRepository {
         this.preferencesManager = preferencesManager;
     }
 
-    public void login(String email, String password, final AuthCallback<AuthToken> callback) {
+    public void login(String email, String password, final AuthCallback<AuthToken> authCallback) {
         LoginRequest loginRequest = new LoginRequest(email, password);
 
         authApiService.login(loginRequest).enqueue(new Callback<AuthToken>() {
@@ -36,21 +35,20 @@ public class AuthRepository {
             public void onResponse(@NonNull Call<AuthToken> call, @NonNull Response<AuthToken> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     AuthToken authToken = response.body();
-                    saveToken(authToken);
-                    callback.onSuccess(authToken);
+                    authCallback.onSuccess(authToken);
                 } else {
-                    handleErrorResponse(response, callback);
+                    handleErrorResponse(response, authCallback);
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<AuthToken> call, @NonNull Throwable t) {
-                callback.onError("Login failed: " + t.getMessage());
+                authCallback.onError("Login failed: " + t.getMessage());
             }
         });
     }
 
-    public void register(String email, String password, String name, final AuthCallback<AuthToken> callback) {
+    public void register(String email, String password, String name, final AuthCallback<AuthToken> authCallback) {
         RegisterRequest registerRequest = new RegisterRequest(email, password, name);
 
         authApiService.register(registerRequest).enqueue(new Callback<AuthToken>() {
@@ -58,39 +56,39 @@ public class AuthRepository {
             public void onResponse(@NonNull Call<AuthToken> call, @NonNull Response<AuthToken> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     AuthToken authToken = response.body();
-                    saveToken(authToken);
-                    callback.onSuccess(authToken);
+                    System.out.println(authToken);
+                    authCallback.onSuccess(authToken);
                 } else {
-                    handleErrorResponse(response, callback);
+                    handleErrorResponse(response, authCallback);
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<AuthToken> call, @NonNull Throwable t) {
-                callback.onError(t.getMessage());
+                authCallback.onError(t.getMessage());
             }
         });
     }
 
-    public void getCurrentUser(final AuthCallback<User> callback) {
-        authApiService.getCurrentUser().enqueue(new Callback<User>() {
+    public void getCurrentUser(final AuthCallback<User> authCallback) {
+        authApiService.getCurrentUser().enqueue(new retrofit2.Callback<User>() {
             @Override
             public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    callback.onSuccess(response.body());
+                    authCallback.onSuccess(response.body());
                 } else {
-                    handleErrorResponse(response, callback);
+                    handleErrorResponse(response, authCallback);
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-                callback.onError(t.getMessage());
+                authCallback.onError(t.getMessage());
             }
         });
     }
 
-    private <T> void handleErrorResponse(Response<T> response, AuthCallback<T> callback) {
+    private <T> void handleErrorResponse(Response<T> response, AuthCallback<T> authCallback) {
         String errorMessage;
 
         switch (response.code()) {
@@ -114,14 +112,6 @@ public class AuthRepository {
                 }
                 break;
         }
-        callback.onError(errorMessage);
-    }
-
-    private void saveToken(AuthToken authToken) {
-        preferencesManager.setToken(authToken.getTokenType() + " " + authToken.getToken());
-    }
-
-    public String getToken() {
-        return preferencesManager.getToken();
+        authCallback.onError(errorMessage);
     }
 }

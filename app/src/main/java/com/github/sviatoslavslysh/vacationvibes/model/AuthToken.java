@@ -1,15 +1,19 @@
 package com.github.sviatoslavslysh.vacationvibes.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class AuthToken {
-    private String token;
+    @SerializedName("access_token")
+    private String accessToken;
+    @SerializedName("token_type")
     private String tokenType;
 
-    public String getToken() {
-        return token;
+    public String getAccessToken() {
+        return accessToken;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 
     public String getTokenType() {
