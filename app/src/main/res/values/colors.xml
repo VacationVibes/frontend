@@ -5,4 +5,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="primaryColor">#6200EE</color>
     <color name="sign_in_color">#757575</color>
+    <color name="tutorialcolor">#FD4780</color>
 </resources>

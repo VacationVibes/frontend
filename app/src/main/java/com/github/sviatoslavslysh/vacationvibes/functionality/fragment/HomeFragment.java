@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -33,6 +34,8 @@ import com.yuyakaido.android.cardstackview.Direction;
 import com.yuyakaido.android.cardstackview.SwipeableMethod;
 
 import java.util.List;
+
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 public class HomeFragment extends Fragment implements CardStackListener {
     private CardStackView cardStackView;
@@ -61,7 +64,6 @@ public class HomeFragment extends Fragment implements CardStackListener {
         }
         return rootView;
     }
-
 
     private void setupCardStackView() {
 //        manager.setStackFrom(StackFrom.None);

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -17,6 +18,7 @@ import com.github.sviatoslavslysh.vacationvibes.model.HomeViewModel;
 import com.github.sviatoslavslysh.vacationvibes.repository.PlaceRepository;
 import com.github.sviatoslavslysh.vacationvibes.utils.PreferencesManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.yuyakaido.android.cardstackview.CardStackView;
 
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
@@ -59,24 +61,33 @@ public class NavigationBarActivity extends AppCompatActivity {
 
             new MaterialTapTargetPrompt.Builder(NavigationBarActivity.this)
                     .setTarget(R.id.navigation_home)
-                    .setPrimaryText("Feed")
-                    .setSecondaryText("See and swipe all locations we think are the best for you :)")
+                    .setPrimaryText("Home")
+                    .setSecondaryText("this is the home menu. here you can see locations we think you will like.")
+                    .setBackgroundColour(ResourcesCompat.getColor(getResources(), R.color.tutorialcolor, getTheme()))
                     .setPromptStateChangeListener((prompt, state1) -> {
                         if (state1 == MaterialTapTargetPrompt.STATE_DISMISSED) {
                             new MaterialTapTargetPrompt.Builder(NavigationBarActivity.this)
-                                    .setTarget(R.id.navigation_profile)
-                                    .setPrimaryText("Profile")
-                                    .setSecondaryText("See your data that we store and manage it")
+                                    .setTarget(R.id.card_stack_view)
+                                    .setPrimaryText("Locations")
+                                    .setSecondaryText(" Swipe the card left to dislike and right to like")
+                                    .setBackgroundColour(ResourcesCompat.getColor(getResources(), R.color.tutorialcolor, getTheme()))
                                     .setPromptStateChangeListener((prompt1, state2) -> {
                                         if (state2 == MaterialTapTargetPrompt.STATE_DISMISSED) {
                                             new MaterialTapTargetPrompt.Builder(NavigationBarActivity.this)
                                                     .setTarget(R.id.navigation_history)
                                                     .setPrimaryText("History")
                                                     .setSecondaryText("Accidentally swiped wrong location? You can find all of them here!")
+                                                    .setBackgroundColour(ResourcesCompat.getColor(getResources(), R.color.tutorialcolor, getTheme()))
                                                     .setPromptStateChangeListener((prompt2, state3) -> {
                                                         if (state3 == MaterialTapTargetPrompt.STATE_DISMISSED) {
                                                             // todo get to the next button
                                                             // User has pressed the prompt target
+                                                            new MaterialTapTargetPrompt.Builder(NavigationBarActivity.this)
+                                                                    .setTarget(R.id.navigation_profile)
+                                                                    .setPrimaryText("Profile")
+                                                                    .setSecondaryText("This is the profile button. press it to view your profile and options like log-out")
+                                                                    .setBackgroundColour(ResourcesCompat.getColor(getResources(), R.color.tutorialcolor, getTheme()))
+                                                                    .show();
                                                         }
                                                     })
                                                     .show();
