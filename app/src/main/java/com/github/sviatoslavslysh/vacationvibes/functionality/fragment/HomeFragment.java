@@ -23,6 +23,7 @@ import com.github.sviatoslavslysh.vacationvibes.functionality.NavigationBarActiv
 import com.github.sviatoslavslysh.vacationvibes.model.AddReactionResponse;
 import com.github.sviatoslavslysh.vacationvibes.model.HomeViewModel;
 import com.github.sviatoslavslysh.vacationvibes.model.Place;
+import com.github.sviatoslavslysh.vacationvibes.model.PlaceImageMin;
 import com.github.sviatoslavslysh.vacationvibes.repository.PlaceRepository;
 import com.github.sviatoslavslysh.vacationvibes.utils.PlaceCallback;
 import com.github.sviatoslavslysh.vacationvibes.utils.PreferencesManager;
@@ -33,6 +34,7 @@ import com.yuyakaido.android.cardstackview.CardStackView;
 import com.yuyakaido.android.cardstackview.Direction;
 import com.yuyakaido.android.cardstackview.SwipeableMethod;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
@@ -58,6 +60,8 @@ public class HomeFragment extends Fragment implements CardStackListener {
             adapter = new CardStackAdapter(homeViewModel.getPlaces());
             manager = new CardStackLayoutManager(requireContext(), HomeFragment.this);
             setupCardStackView();
+//        } else if (preferencesManager.isFirstOpen()) {
+//            startTutorial();
         } else if (!homeViewModel.isAwaitingResponse()) {
             // do nothing if already awaiting response on another (probably already hidden) activity
             loadPlaces();
@@ -67,12 +71,12 @@ public class HomeFragment extends Fragment implements CardStackListener {
 
     private void setupCardStackView() {
 //        manager.setStackFrom(StackFrom.None);
-        manager.setVisibleCount(1);
+        manager.setVisibleCount(3);
 //        manager.setTranslationInterval(8.0f);
 //        manager.setScaleInterval(0.95f);
 //        manager.setSwipeThreshold(0.3f);
         manager.setMaxDegree(45.0f);
-        manager.setDirections(Direction.HORIZONTAL);
+        manager.setDirections(Direction.HORIZONTAL);  // will be overwritten anyway by onCardAppeared
         manager.setCanScrollHorizontal(true);
         manager.setCanScrollVertical(true);
         manager.setSwipeableMethod(SwipeableMethod.Manual);
@@ -87,6 +91,19 @@ public class HomeFragment extends Fragment implements CardStackListener {
     }
 
     private void loadPlaces() {
+        adapter = new CardStackAdapter(null);
+        if (preferencesManager.isFirstOpen()) {
+            List<PlaceImageMin> tutorialRightImage = new ArrayList<>();
+            tutorialRightImage.add(new PlaceImageMin("https://i.imgur.com/VJA3dmI.png"));
+            List<PlaceImageMin> tutorialLeftImage = new ArrayList<>();
+            tutorialLeftImage.add(new PlaceImageMin("https://i.imgur.com/TGqOLSX.png"));
+
+            adapter.addPlace(new Place("tutorialRight", "A quick tutorial", "", "", "", "Swipe to the right to like place", new ArrayList<>(), tutorialRightImage, new ArrayList<>()));
+            adapter.addPlace(new Place("tutorialLeft", "A quick tutorial", "", "", "", "Swipe to the left to dislike place", new ArrayList<>(), tutorialLeftImage, new ArrayList<>()));
+
+            homeViewModel.setPlaces(adapter.getPlaces());
+        }
+
         homeViewModel.setAwaitingResponse(true);
         placeRepository.getFeed(new PlaceCallback<List<Place>>() {
             @Override
@@ -94,11 +111,17 @@ public class HomeFragment extends Fragment implements CardStackListener {
                 homeViewModel.setAwaitingResponse(false);
                 if (isAdded()) {
                     // todo delete this toast
-                    ToastManager.showToast(requireActivity(), "Retrieved places successfully!");
-                    adapter = new CardStackAdapter(places);
+//                    ToastManager.showToast(requireActivity(), "Retrieved places successfully!");
+                    for (Place place : places) {
+                        adapter.addPlace(place);
+                    }
+//                    adapter = new CardStackAdapter(places);
                     manager = new CardStackLayoutManager(requireContext(), HomeFragment.this);
                     setupCardStackView();
-                    homeViewModel.setPlaces(places);
+                    List<Place> allPlaces = adapter.getPlaces();
+                    System.out.println("top position 3 " + manager.getTopPosition());
+                    List<Place> cachePlaces = allPlaces.subList(manager.getTopPosition(), allPlaces.size());
+                    homeViewModel.setPlaces(cachePlaces);
                 }
             }
 
@@ -129,32 +152,15 @@ public class HomeFragment extends Fragment implements CardStackListener {
 
     @Override
     public void onCardAppeared(@Nullable View view, int i) {
-        System.out.println("onCardAppeared i -> " + i);
+        Place currentPlace = adapter.getPlaces().get(i);
+        if (currentPlace.getId().equals("tutorialLeft")) {
+            manager.setDirections(List.of(Direction.Left));
+        } else if (currentPlace.getId().equals("tutorialRight")) {
+            manager.setDirections(List.of(Direction.Right));
+        } else {
+            manager.setDirections(Direction.HORIZONTAL);
+        }
         // todo modify homeViewModel
-//        List<String[]> spotsData = Arrays.asList(
-////                new String[]{"Yasaka Shrine", "Kyoto", "https://images.unsplash.com/photo-1713346642924-fdda99d45870"},
-////                new String[]{"Fushimi Inari Shrine", "Kyoto", "https://images.unsplash.com/photo-1542767673-ee5103fedbb1"},
-//                new String[]{"Bamboo Forest", "Kyoto", "https://images.unsplash.com/photo-1531021713651-fdd4ac075ac1"},
-//                new String[]{"The statue of Liberty", "New York", "https://images.unsplash.com/photo-1670821911205-00c0d9582b92"},
-//                new String[]{"Empire State Building", "New York", "https://images.unsplash.com/photo-1663052721527-0d971e81d257"},
-//                new String[]{"Brooklyn Bridge", "New York", "https://images.unsplash.com/photo-1585163435462-7e7796fa4b9e"},
-//                new String[]{"Louvre Museum", "Paris", "https://images.unsplash.com/photo-1555929940-b435de81524e"},
-//                new String[]{"Eiffel Tower", "Paris", "https://images.unsplash.com/photo-1609971757431-439cf7b4141b"},
-//                new String[]{"Big Ben", "London", "https://images.unsplash.com/photo-1454793147212-9e7e57e89a4f"},
-//                new String[]{"Great Wall of China", "China", "https://images.unsplash.com/photo-1558981017-9c65fb6f2530"}
-//        );
-//
-//        Random random = new Random();
-//        int randomIndex = random.nextInt(spotsData.size());
-//
-//        String[] selectedSpot = spotsData.get(randomIndex);
-//        Place newPlace = new Place(selectedSpot[0], selectedSpot[1], selectedSpot[2]);
-//        cardStackView.post(() -> adapter.addPlace(newPlace));
-//        adapter.addSpot(newSpot);
-//        List<Spot> spots = adapter.getSpots();
-//        spots.add(newSpot);
-////        adapter.setSpots(spots);
-//        adapter = new CardStackAdapter(createSpots());
     }
 
     @Override
@@ -165,8 +171,9 @@ public class HomeFragment extends Fragment implements CardStackListener {
     @Override
     public void onCardSwiped(@Nullable Direction direction) {
         List<Place> allPlaces = adapter.getPlaces();
-        allPlaces.remove(0);
-        homeViewModel.setPlaces(allPlaces);
+        System.out.println("top position " + manager.getTopPosition());
+        List<Place> cachePlaces = allPlaces.subList(manager.getTopPosition(), allPlaces.size());
+        homeViewModel.setPlaces(cachePlaces);
         String reaction = "";
         assert direction != null;
         if (direction.equals(Direction.Left)) {
@@ -176,7 +183,12 @@ public class HomeFragment extends Fragment implements CardStackListener {
             // like
             reaction = "like";
         }
-        Place currentPlace = adapter.getPlaces().get(0);
+        Place currentPlace = adapter.getPlaces().get(manager.getTopPosition() - 1);
+        if (currentPlace.getNote() != null) {  // ignoring tutorial cards
+            if (currentPlace.getId().equals("tutorialRight") || currentPlace.getId().equals("tutorialLeft")) {
+                return;
+            }
+        }
         placeRepository.addReaction(currentPlace.getId(), reaction, new PlaceCallback<AddReactionResponse>() {
             @Override
             public void onSuccess(AddReactionResponse result) {

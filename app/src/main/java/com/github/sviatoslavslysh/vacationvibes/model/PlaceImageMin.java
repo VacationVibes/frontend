@@ -6,6 +6,10 @@ public class PlaceImageMin {
     @SerializedName("image_url")
     private String imageUrl;
 
+    public PlaceImageMin(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     public String getImageUrl() {
         return imageUrl;
     }

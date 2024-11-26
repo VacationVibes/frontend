@@ -24,6 +24,8 @@ public class Place {
     @SerializedName("reactions")
     private List<PlaceReactionMin> reactions;
 
+    private String note;
+
     public Place(String id,
                  String name,
                  String latitude,
@@ -41,6 +43,27 @@ public class Place {
         this.images = images;
         this.reactions = reactions;
     }
+
+    public Place(String id,
+                 String name,
+                 String latitude,
+                 String longitude,
+                 String createdAt,
+                 String note,
+                 List<PlaceTypeMin> types,
+                 List<PlaceImageMin> images,
+                 List<PlaceReactionMin> reactions) {
+        this.id = id;
+        this.name = name;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.createdAt = createdAt;
+        this.note = note;
+        this.types = types;
+        this.images = images;
+        this.reactions = reactions;
+    }
+
 
     public String getId() {
         return id;
@@ -104,5 +127,9 @@ public class Place {
 
     public void setReactions(List<PlaceReactionMin> reactions) {
         this.reactions = reactions;
+    }
+
+    public String getNote() {
+        return note;
     }
 }

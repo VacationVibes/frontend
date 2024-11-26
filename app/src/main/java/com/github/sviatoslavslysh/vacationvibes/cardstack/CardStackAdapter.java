@@ -35,7 +35,11 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
     public void onBindViewHolder(ViewHolder holder, int position) {
         Place place = places.get(position);
         holder.name.setText(place.getName());
-        holder.location.setText("51  miles from you");  // todo calculate and show distance from user
+        if (place.getNote() != null) {  // note is not empty
+            holder.location.setText(place.getNote());
+        } else {  // note is empty
+            holder.location.setText("51  miles away");  // todo calculate and show distance from user
+        }
         Glide.with(holder.image)
                 .load(place.getImages().get(0).getImageUrl())
                 .into(holder.image);
