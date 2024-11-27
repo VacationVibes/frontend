@@ -71,7 +71,7 @@ public class HomeFragment extends Fragment implements CardStackListener {
 
     private void setupCardStackView() {
 //        manager.setStackFrom(StackFrom.None);
-        manager.setVisibleCount(3);
+        manager.setVisibleCount(6);
 //        manager.setTranslationInterval(8.0f);
 //        manager.setScaleInterval(0.95f);
 //        manager.setSwipeThreshold(0.3f);

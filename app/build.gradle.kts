@@ -35,7 +35,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
@@ -50,4 +49,5 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation(libs.cardstackview)
     implementation(libs.glide)
+    implementation(libs.swiperefreshlayout)
 }

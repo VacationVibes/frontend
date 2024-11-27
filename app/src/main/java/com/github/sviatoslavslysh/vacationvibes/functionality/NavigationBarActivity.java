@@ -14,6 +14,7 @@ import com.github.sviatoslavslysh.vacationvibes.R;
 import com.github.sviatoslavslysh.vacationvibes.functionality.fragment.HistoryFragment;
 import com.github.sviatoslavslysh.vacationvibes.functionality.fragment.HomeFragment;
 import com.github.sviatoslavslysh.vacationvibes.functionality.fragment.ProfileFragment;
+import com.github.sviatoslavslysh.vacationvibes.model.HistoryViewModel;
 import com.github.sviatoslavslysh.vacationvibes.model.HomeViewModel;
 import com.github.sviatoslavslysh.vacationvibes.repository.PlaceRepository;
 import com.github.sviatoslavslysh.vacationvibes.utils.PreferencesManager;
@@ -35,6 +36,7 @@ public class NavigationBarActivity extends AppCompatActivity {
         placeRepository = new PlaceRepository();
         preferencesManager = new PreferencesManager(this);
         new ViewModelProvider(this).get(HomeViewModel.class);
+        new ViewModelProvider(this).get(HistoryViewModel.class);
 
         BottomNavigationView navView = findViewById(R.id.navbar);
         navView.setOnItemSelectedListener(item -> {

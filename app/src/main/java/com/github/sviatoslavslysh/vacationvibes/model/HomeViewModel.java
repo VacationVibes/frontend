@@ -2,6 +2,7 @@ package com.github.sviatoslavslysh.vacationvibes.model;
 
 import androidx.lifecycle.ViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeViewModel extends ViewModel {
@@ -21,7 +22,7 @@ public class HomeViewModel extends ViewModel {
     }
 
     public List<Place> getPlaces() {
-        return places;
+        return new ArrayList<>(places);
     }
 
     public void setPlaces(List<Place> places) {
