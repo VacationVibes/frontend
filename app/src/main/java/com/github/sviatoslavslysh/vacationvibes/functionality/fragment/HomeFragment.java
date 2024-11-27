@@ -56,13 +56,16 @@ public class HomeFragment extends Fragment implements CardStackListener {
         placeRepository = ((NavigationBarActivity) requireActivity()).getPlaceRepository();
         preferencesManager = ((NavigationBarActivity) requireActivity()).getPreferencesManager();
         cardStackView = rootView.findViewById(R.id.card_stack_view);
+        adapter = new CardStackAdapter(null);
+
         if (!homeViewModel.isDataLoaded()) {
             adapter = new CardStackAdapter(homeViewModel.getPlaces());
             manager = new CardStackLayoutManager(requireContext(), HomeFragment.this);
             setupCardStackView();
-//        } else if (preferencesManager.isFirstOpen()) {
-//            startTutorial();
-        } else if (!homeViewModel.isAwaitingResponse()) {
+        } else if (preferencesManager.isFirstOpen()) {
+            startTutorial();
+        }
+        if (!homeViewModel.isAwaitingResponse()) {
             // do nothing if already awaiting response on another (probably already hidden) activity
             loadPlaces();
         }
@@ -90,19 +93,19 @@ public class HomeFragment extends Fragment implements CardStackListener {
         }
     }
 
+    private void startTutorial() {
+        List<PlaceImageMin> tutorialRightImage = new ArrayList<>();
+        tutorialRightImage.add(new PlaceImageMin("https://i.imgur.com/VJA3dmI.png"));
+        List<PlaceImageMin> tutorialLeftImage = new ArrayList<>();
+        tutorialLeftImage.add(new PlaceImageMin("https://i.imgur.com/TGqOLSX.png"));
+
+        adapter.addPlace(new Place("tutorialRight", "A quick tutorial", "", "", "", "Swipe to the right to like place", new ArrayList<>(), tutorialRightImage, new ArrayList<>()));
+        adapter.addPlace(new Place("tutorialLeft", "A quick tutorial", "", "", "", "Swipe to the left to dislike place", new ArrayList<>(), tutorialLeftImage, new ArrayList<>()));
+
+        homeViewModel.setPlaces(adapter.getPlaces());
+    }
+
     private void loadPlaces() {
-        adapter = new CardStackAdapter(null);
-        if (preferencesManager.isFirstOpen()) {
-            List<PlaceImageMin> tutorialRightImage = new ArrayList<>();
-            tutorialRightImage.add(new PlaceImageMin("https://i.imgur.com/VJA3dmI.png"));
-            List<PlaceImageMin> tutorialLeftImage = new ArrayList<>();
-            tutorialLeftImage.add(new PlaceImageMin("https://i.imgur.com/TGqOLSX.png"));
-
-            adapter.addPlace(new Place("tutorialRight", "A quick tutorial", "", "", "", "Swipe to the right to like place", new ArrayList<>(), tutorialRightImage, new ArrayList<>()));
-            adapter.addPlace(new Place("tutorialLeft", "A quick tutorial", "", "", "", "Swipe to the left to dislike place", new ArrayList<>(), tutorialLeftImage, new ArrayList<>()));
-
-            homeViewModel.setPlaces(adapter.getPlaces());
-        }
 
         homeViewModel.setAwaitingResponse(true);
         placeRepository.getFeed(new PlaceCallback<List<Place>>() {
