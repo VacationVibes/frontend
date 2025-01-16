@@ -12,12 +12,12 @@ import com.github.sviatoslavslysh.vacationvibes.api.ApiClient;
 import com.github.sviatoslavslysh.vacationvibes.auth.LoginActivity;
 import com.github.sviatoslavslysh.vacationvibes.functionality.NavigationBarActivity;
 import com.github.sviatoslavslysh.vacationvibes.utils.PreferencesManager;
+import com.google.android.material.color.DynamicColors;
 
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         PreferencesManager preferencesManager = new PreferencesManager(this);
 
         if (preferencesManager.isLoggedIn()) {
