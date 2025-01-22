@@ -6,4 +6,5 @@
     <color name="primaryColor">#6200EE</color>
     <color name="sign_in_color">#757575</color>
     <color name="tutorialcolor">#FD4780</color>
+    <color name="cardspotbackground">?android:attr/colorBackground</color>
 </resources>

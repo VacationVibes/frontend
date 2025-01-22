@@ -66,6 +66,7 @@ public class NavigationBarActivity extends AppCompatActivity {
                     .setPrimaryText("Home")
                     .setSecondaryText("this is the home menu. here you can see locations we think you will like.")
                     .setBackgroundColour(ResourcesCompat.getColor(getResources(), R.color.tutorialcolor, getTheme()))
+                    .setFocalColour(android.R.attr.colorForeground)
                     .setPromptStateChangeListener((prompt, state1) -> {
                         if (state1 == MaterialTapTargetPrompt.STATE_DISMISSED) {
                             new MaterialTapTargetPrompt.Builder(NavigationBarActivity.this)
@@ -73,6 +74,7 @@ public class NavigationBarActivity extends AppCompatActivity {
                                     .setPrimaryText("Profile")
                                     .setSecondaryText("This is the profile button. press it to view your profile and options like log-out")
                                     .setBackgroundColour(ResourcesCompat.getColor(getResources(), R.color.tutorialcolor, getTheme()))
+                                    .setFocalColour(android.R.attr.colorForeground)
                                     .setPromptStateChangeListener((prompt1, state2) -> {
                                         if (state2 == MaterialTapTargetPrompt.STATE_DISMISSED) {
                                             new MaterialTapTargetPrompt.Builder(NavigationBarActivity.this)
@@ -80,6 +82,7 @@ public class NavigationBarActivity extends AppCompatActivity {
                                                     .setPrimaryText("History")
                                                     .setSecondaryText("Accidentally swiped wrong location? You can find all of them here!")
                                                     .setBackgroundColour(ResourcesCompat.getColor(getResources(), R.color.tutorialcolor, getTheme()))
+                                                    .setFocalColour(android.R.attr.colorForeground)
                                                     .setPromptStateChangeListener((prompt2, state3) -> {
 //                                                        if (state3 == MaterialTapTargetPrompt.STATE_DISMISSED) {
 //                                                            // todo get to the next button
