@@ -2,8 +2,6 @@ package com.github.sviatoslavslysh.vacationvibes.functionality.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,19 +15,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.github.sviatoslavslysh.vacationvibes.MainActivity;
 import com.github.sviatoslavslysh.vacationvibes.R;
-import com.github.sviatoslavslysh.vacationvibes.api.ApiClient;
-import com.github.sviatoslavslysh.vacationvibes.auth.LoginActivity;
-import com.github.sviatoslavslysh.vacationvibes.functionality.NavigationBarActivity;
-import com.github.sviatoslavslysh.vacationvibes.model.AuthToken;
-import com.github.sviatoslavslysh.vacationvibes.model.HomeViewModel;
 import com.github.sviatoslavslysh.vacationvibes.model.ProfileViewModel;
 import com.github.sviatoslavslysh.vacationvibes.model.User;
 import com.github.sviatoslavslysh.vacationvibes.repository.AuthRepository;
 import com.github.sviatoslavslysh.vacationvibes.utils.AuthCallback;
 import com.github.sviatoslavslysh.vacationvibes.utils.PreferencesManager;
 import com.github.sviatoslavslysh.vacationvibes.utils.ToastManager;
-
-import java.util.Objects;
 
 
 public class ProfileFragment extends Fragment {
@@ -39,7 +30,8 @@ public class ProfileFragment extends Fragment {
 
     private TextView userNameTextView;
     private TextView likeCountTextView;
-    private  TextView dislikeCountTextView;
+    private TextView dislikeCountTextView;
+    private User currentUser;
 
 
     @Nullable
@@ -59,6 +51,8 @@ public class ProfileFragment extends Fragment {
         logoutButton.setOnClickListener(v -> logout());
         if (profileViewModel.getId() == null) {
             loadCurrentUser();
+        } else {
+            showUser(profileViewModel.getName());
         }
         return rootView;
     }
@@ -82,14 +76,11 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onSuccess(User user) {
                 profileViewModel.setAwaitingResponse(false);
+                profileViewModel.setId(user.getId());
                 profileViewModel.setName(user.getName());
                 profileViewModel.setEmail(user.getEmail());
-                profileViewModel.setId(user.getId());
-                userNameTextView.setText(user.getName());
-
-                // todo finish
-//                likeCountTextView.setText(String.valueOf(user.getLikes()));
-//                dislikeCountTextView.setText(String.valueOf(user.getDislikes()));
+                // todo add liked and disliked amount
+                showUser(user.getName());
             }
 
             @Override
@@ -98,5 +89,13 @@ public class ProfileFragment extends Fragment {
                 ToastManager.showToast(requireContext(), errorMessage);
             }
         });
+    }
+
+    public void showUser(String name) {
+        userNameTextView.setText(name);
+
+        // todo finish
+//        likeCountTextView.setText(String.valueOf(currentUser.getLikes()));
+//        dislikeCountTextView.setText(String.valueOf(currentUser.getDislikes()));
     }
 }
