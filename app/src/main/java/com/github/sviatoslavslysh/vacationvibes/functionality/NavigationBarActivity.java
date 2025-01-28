@@ -58,50 +58,6 @@ public class NavigationBarActivity extends AppCompatActivity {
 
         if (preferencesManager.isFirstOpen()) {
             preferencesManager.setFirstOpen(false);
-
-            // todo the first tutorial to see must be tutorial on how to swipe
-
-            new MaterialTapTargetPrompt.Builder(NavigationBarActivity.this)
-                    .setTarget(R.id.navigation_home)
-                    .setPrimaryText("Home")
-                    .setSecondaryText("this is the home menu. here you can see locations we think you will like.")
-                    .setBackgroundColour(ResourcesCompat.getColor(getResources(), R.color.tutorialcolor, getTheme()))
-                    .setFocalColour(android.R.attr.colorForeground)
-                    .setPromptStateChangeListener((prompt, state1) -> {
-                        if (state1 == MaterialTapTargetPrompt.STATE_DISMISSED) {
-                            new MaterialTapTargetPrompt.Builder(NavigationBarActivity.this)
-                                    .setTarget(R.id.navigation_profile)
-                                    .setPrimaryText("Profile")
-                                    .setSecondaryText("This is the profile button. press it to view your profile and options like log-out")
-                                    .setBackgroundColour(ResourcesCompat.getColor(getResources(), R.color.tutorialcolor, getTheme()))
-                                    .setFocalColour(android.R.attr.colorForeground)
-                                    .setPromptStateChangeListener((prompt1, state2) -> {
-                                        if (state2 == MaterialTapTargetPrompt.STATE_DISMISSED) {
-                                            new MaterialTapTargetPrompt.Builder(NavigationBarActivity.this)
-                                                    .setTarget(R.id.navigation_history)
-                                                    .setPrimaryText("History")
-                                                    .setSecondaryText("Accidentally swiped wrong location? You can find all of them here!")
-                                                    .setBackgroundColour(ResourcesCompat.getColor(getResources(), R.color.tutorialcolor, getTheme()))
-                                                    .setFocalColour(android.R.attr.colorForeground)
-                                                    .setPromptStateChangeListener((prompt2, state3) -> {
-//                                                        if (state3 == MaterialTapTargetPrompt.STATE_DISMISSED) {
-//                                                            // todo get to the next button
-//                                                            // User has pressed the prompt target
-//                                                            new MaterialTapTargetPrompt.Builder(NavigationBarActivity.this)
-//                                                                    .setTarget(R.id.card_stack_view)
-//                                                                    .setPrimaryText("Locations")
-//                                                                    .setSecondaryText("Swipe to the left or right")
-//                                                                    .setBackgroundColour(ResourcesCompat.getColor(getResources(), R.color.tutorialcolor, getTheme()))
-//                                                                    .show();
-//                                                        }
-                                                    })
-                                                    .show();
-                                        }
-                                    })
-                                    .show();
-                        }
-                    })
-                    .show();
         }
 
         if (savedInstanceState == null) {
