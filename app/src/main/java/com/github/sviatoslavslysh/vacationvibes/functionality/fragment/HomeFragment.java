@@ -230,6 +230,6 @@ public class HomeFragment extends Fragment implements CardStackListener {
 
     @Override
     public void onCardDisappeared(@Nullable View view, int i) {
-        System.out.println("onCardDragging " + view + " " + i);
+        System.out.println("onCardDisappeared " + view + " " + i);
     }
 }
