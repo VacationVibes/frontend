@@ -24,7 +24,7 @@
         android:layout_marginBottom="100dp"
         app:cardElevation="0dp">
 
-        <com.github.sviatoslavslysh.vacationvibes.utils.RoundRectCornerImageView
+        <ImageView
             android:id="@+id/feed_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

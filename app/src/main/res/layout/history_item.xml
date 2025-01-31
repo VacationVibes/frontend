@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="4dp"
-    android:background="?attr/selectableItemBackground">
+    android:background="?attr/selectableItemBackground"
+    android:padding="8dp">
 
-    <ImageView
-        android:id="@+id/history_place_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/baseline_hide_image_24"
-        android:contentDescription="@string/place_image_description"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="40dp"
-        android:scaleType="fitCenter"/>
+        <com.github.sviatoslavslysh.vacationvibes.utils.HistoryCircularImageView
+            android:id="@+id/history_place_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="@string/place_image_description"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            android:src="@drawable/baseline_hide_image_24"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="40dp"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
         android:id="@+id/history_place_reaction"
@@ -38,20 +38,22 @@
         android:id="@+id/history_place_name"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="26dp"
+        android:fontFamily="@font/orbitron_regular"
         android:text="Action Title"
-        android:textSize="15sp"
-        android:textColor="#000000"
-        app:layout_constraintStart_toEndOf="@id/history_place_image"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="#E67240"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="110dp" />
+        app:layout_constraintStart_toEndOf="@id/history_place_image"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/history_place_distance"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="110dp"
+        android:fontFamily="@font/orbitron_regular"
+        android:layout_marginStart="116dp"
         android:layout_marginTop="10dp"
         android:text="Description"
         android:textColor="?android:attr/textColorPrimary"
