@@ -37,7 +37,6 @@ import com.yuyakaido.android.cardstackview.SwipeableMethod;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 public class HomeFragment extends Fragment implements CardStackListener {
     private CardStackView cardStackView;
@@ -58,14 +57,14 @@ public class HomeFragment extends Fragment implements CardStackListener {
         cardStackView = rootView.findViewById(R.id.card_stack_view);
         adapter = new CardStackAdapter(null);
 
-        if (!homeViewModel.isDataLoaded()) {
+        if (homeViewModel.isDataLoaded()) {
             adapter = new CardStackAdapter(homeViewModel.getPlaces());
             manager = new CardStackLayoutManager(requireContext(), HomeFragment.this);
             setupCardStackView();
         } else if (preferencesManager.isFirstOpen()) {
             startTutorial();
         }
-        if (!homeViewModel.isAwaitingResponse()) {
+        if (!homeViewModel.isDataLoaded() && !homeViewModel.isAwaitingResponse()) {
             // do nothing if already awaiting response on another (probably already hidden) activity
             loadPlaces();
         }

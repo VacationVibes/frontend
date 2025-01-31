@@ -18,7 +18,7 @@ public class HomeViewModel extends ViewModel {
     }
 
     public boolean isDataLoaded() {
-        return places == null || places.isEmpty();
+        return places != null && !places.isEmpty();
     }
 
     public List<Place> getPlaces() {
