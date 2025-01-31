@@ -17,23 +17,14 @@
         android:background="?android:attr/colorBackgroundFloating"
         android:textAppearance="@style/location" />
 
-    <androidx.cardview.widget.CardView
+    <ImageView
+        android:id="@+id/feed_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="100dp"
-        app:cardElevation="0dp">
-
-        <ImageView
-            android:id="@+id/feed_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:contentDescription="@string/feed_image"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter" />
-
-    </androidx.cardview.widget.CardView>
+        android:layout_gravity="center"
+        android:contentDescription="@string/feed_image"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter" />
 
 
     <TextView
