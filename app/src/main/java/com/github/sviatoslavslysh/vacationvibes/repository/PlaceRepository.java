@@ -93,8 +93,8 @@ public class PlaceRepository {
         });
     }
 
-    public void getFeed(final PlaceCallback<List<Place>> placeCallback) {
-        placeApiService.getFeed().enqueue(new retrofit2.Callback<List<Place>>() {
+    public void getFeed(List<String> ignoreIds, final PlaceCallback<List<Place>> placeCallback) {
+        placeApiService.getFeed(ignoreIds).enqueue(new retrofit2.Callback<List<Place>>() {
             @Override
             public void onResponse(@NonNull Call<List<Place>> call, @NonNull Response<List<Place>> response) {
                 if (response.isSuccessful() && response.body() != null) {

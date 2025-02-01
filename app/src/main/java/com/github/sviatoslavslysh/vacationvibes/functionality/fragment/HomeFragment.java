@@ -109,9 +109,13 @@ public class HomeFragment extends Fragment implements CardStackListener {
     }
 
     private void loadPlaces(Boolean setupLayout) {
+        List<String> placeIdsArray = new ArrayList<>();
+        for (Place place : homeViewModel.getPlaces()) {
+            placeIdsArray.add(place.getId());
+        }
 
         homeViewModel.setAwaitingResponse(true);
-        placeRepository.getFeed(new PlaceCallback<List<Place>>() {
+        placeRepository.getFeed(placeIdsArray, new PlaceCallback<List<Place>>() {
             @Override
             public void onSuccess(List<Place> places) {
                 homeViewModel.setAwaitingResponse(false);
@@ -233,9 +237,11 @@ public class HomeFragment extends Fragment implements CardStackListener {
     public void onCardDisappeared(@Nullable View view, int i) {
         Log.d("onCardDisappeared", "Places amount " + String.valueOf(homeViewModel.getPlacesAmount()));
 
-        if (homeViewModel.getPlacesAmount() == 6) {
-            loadPlaces(false);
-            Log.d("HomeFragment.onCardDisappeared", "Adding additional places");
+        if (homeViewModel.getPlacesAmount() <= 8) {
+            if (!homeViewModel.isAwaitingResponse()) {
+                loadPlaces(false);
+                Log.d("HomeFragment.onCardDisappeared", "Adding additional places");
+            }
         }
     }
 }

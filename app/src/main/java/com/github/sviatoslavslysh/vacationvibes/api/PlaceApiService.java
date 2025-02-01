@@ -20,5 +20,5 @@ public interface PlaceApiService {
     Call<List<Place>> getReactions(@Query("offset") int offset, @Query("limit") int limit);
 
     @GET("place/feed")
-    Call<List<Place>> getFeed();
+    Call<List<Place>> getFeed(@Query("ignore_ids") List<String> ignoreIds);
 }
