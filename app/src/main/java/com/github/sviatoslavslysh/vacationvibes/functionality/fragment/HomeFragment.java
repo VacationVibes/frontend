@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +70,7 @@ public class HomeFragment extends Fragment implements CardStackListener {
         }
         if (!homeViewModel.isDataLoaded() && !homeViewModel.isAwaitingResponse()) {
             // do nothing if already awaiting response on another (probably already hidden) activity
-            loadPlaces();
+            loadPlaces(true);
         }
         return rootView;
     }
@@ -107,7 +108,7 @@ public class HomeFragment extends Fragment implements CardStackListener {
         homeViewModel.setPlaces(adapter.getPlaces());
     }
 
-    private void loadPlaces() {
+    private void loadPlaces(Boolean setupLayout) {
 
         homeViewModel.setAwaitingResponse(true);
         placeRepository.getFeed(new PlaceCallback<List<Place>>() {
@@ -119,14 +120,12 @@ public class HomeFragment extends Fragment implements CardStackListener {
 //                    ToastManager.showToast(requireActivity(), "Retrieved places successfully!");
                     for (Place place : places) {
                         adapter.addPlace(place);
+                        homeViewModel.addPlace(place);
                     }
-//                    adapter = new CardStackAdapter(places);
-                    manager = new CardStackLayoutManager(requireContext(), HomeFragment.this);
-                    setupCardStackView();
-                    List<Place> allPlaces = adapter.getPlaces();
-                    System.out.println("top position 3 " + manager.getTopPosition());
-                    List<Place> cachePlaces = allPlaces.subList(manager.getTopPosition(), allPlaces.size());
-                    homeViewModel.setPlaces(cachePlaces);
+                    if (setupLayout) {
+                        manager = new CardStackLayoutManager(requireContext(), HomeFragment.this);
+                        setupCardStackView();
+                    }
                 }
             }
 
@@ -232,6 +231,11 @@ public class HomeFragment extends Fragment implements CardStackListener {
 
     @Override
     public void onCardDisappeared(@Nullable View view, int i) {
-        System.out.println("onCardDisappeared " + view + " " + i);
+        Log.d("onCardDisappeared", "Places amount " + String.valueOf(homeViewModel.getPlacesAmount()));
+
+        if (homeViewModel.getPlacesAmount() == 6) {
+            loadPlaces(false);
+            Log.d("HomeFragment.onCardDisappeared", "Adding additional places");
+        }
     }
 }
