@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         finish();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
     private void startBlockingActivity() {
