@@ -1,4 +1,4 @@
-package com.github.sviatoslavslysh.vacationvibes.auth;
+package com.github.sviatoslavslysh.vacationvibes.activity;
 
 
 import android.animation.AnimatorSet;
@@ -28,60 +28,48 @@ import com.github.sviatoslavslysh.vacationvibes.R;
 import com.github.sviatoslavslysh.vacationvibes.utils.ToastManager;
 import com.github.sviatoslavslysh.vacationvibes.utils.InputValidator;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+public class LoginActivity extends AppCompatActivity {
 
-public class RegisterActivity extends AppCompatActivity {
-    private EditText nameEditText;
     private EditText emailEditText;
     private EditText passwordEditText;
-    private Button registerButton;
-    private TextView switchToLoginText;
-    private ExecutorService executorService;
+    private Button loginButton;
+    private TextView switchToRegisterText;
     private InputValidator inputValidator;
     private AuthRepository authRepository;
-    private CardView registerButtonCardView;
+    private CardView loginButtonCardView;
     private ImageView vv_logo_background;
     private ImageView vv_logo_foreground;
     private ValueAnimator rotationAnimator;
     private PreferencesManager preferencesManager;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_login);
 
         preferencesManager = new PreferencesManager(this);
-        nameEditText = findViewById(R.id.name_label);
         emailEditText = findViewById(R.id.email_label);
         passwordEditText = findViewById(R.id.password_label);
-        registerButton = findViewById(R.id.register);
-        switchToLoginText = findViewById(R.id.set_login);
-        registerButtonCardView = findViewById(R.id.card_view_register);
+        loginButtonCardView = findViewById(R.id.card_view_sign_in);
         vv_logo_background = findViewById(R.id.vv_logo_background);
         vv_logo_foreground = findViewById(R.id.vv_logo_foreground);
 
         inputValidator = new InputValidator();
         authRepository = new AuthRepository(new PreferencesManager(this));
-        executorService = Executors.newSingleThreadExecutor();
 
-        switchToLoginText.setOnClickListener(v -> switchToLogin());
-        registerButton.setOnClickListener(v -> sendRegisterRequest());
+        loginButton = findViewById(R.id.sign_in);
+        switchToRegisterText = findViewById(R.id.set_sign_up);
+        switchToRegisterText.setOnClickListener(v -> switchToRegister());
+        loginButton.setOnClickListener(v -> sendLoginRequest());
+
     }
 
-    private void sendRegisterRequest() {
-        registerButton.setEnabled(false);
+    private void sendLoginRequest() {
+        loginButton.setEnabled(false);
 
-        String name = nameEditText.getText().toString().trim();
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
-
         boolean validInput = true;
-        if (!inputValidator.isValidName(name)) {
-            ToastManager.showToast(this, "Please enter your name");
-            validInput = false;
-        }
         if (!inputValidator.isValidEmail(email)) {
             ToastManager.showToast(this, "Please enter valid email address");
             validInput = false;
@@ -90,10 +78,10 @@ public class RegisterActivity extends AppCompatActivity {
             ToastManager.showToast(this, "Password can not be shorter than 6 symbols");
             validInput = false;
         }
-        boolean finalValidInput = validInput;
 
         Animation scaleUp = AnimationUtils.loadAnimation(this, R.anim.scale_up);
-        registerButtonCardView.startAnimation(scaleUp);
+        loginButtonCardView.startAnimation(scaleUp);
+        boolean finalValidInput = validInput;
         scaleUp.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -102,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 Animation scaleDown = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale_down);
-                registerButtonCardView.startAnimation(scaleDown);
+                loginButtonCardView.startAnimation(scaleDown);
 
                 scaleDown.setAnimationListener(new Animation.AnimationListener() {
                     @Override
@@ -112,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onAnimationEnd(Animation animation) {
                         if (!finalValidInput) {
-                            registerButton.setEnabled(true);
+                            loginButton.setEnabled(true);
                         }
                     }
 
@@ -133,39 +121,37 @@ public class RegisterActivity extends AppCompatActivity {
 
         startAnimation();
 
-        authRepository.register(email, password, name, new AuthCallback<AuthToken>() {
+        authRepository.login(email, password, new AuthCallback<AuthToken>() {
             @Override
             public void onSuccess(AuthToken authToken) {
                 preferencesManager.setToken(authToken.getAccessToken());
                 ApiClient.setAuthToken(authToken.getAccessToken());
 
-                // todo manage animations
-                stopAnimation();
-                ToastManager.showToast(RegisterActivity.this, "Registration successful!");
+                ToastManager.showToast(LoginActivity.this, "Login successful!");
                 new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                    Intent intent = new Intent(RegisterActivity.this, NavigationBarActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, NavigationBarActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     finish();
                 }, 200);
 
+                stopAnimation();
             }
 
             @Override
             public void onError(String errorMessage) {
+                ToastManager.showToast(LoginActivity.this, errorMessage);
                 stopAnimation();
-                ToastManager.showToast(RegisterActivity.this, errorMessage);
             }
         });
     }
 
-    private void switchToLogin() {
-        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+    private void switchToRegister() {
+        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finish();
     }
-
 
     private void startAnimation() {
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(vv_logo_background, "scaleX", 1f, 1.2f);
@@ -206,7 +192,6 @@ public class RegisterActivity extends AppCompatActivity {
 //            vv_logo_foreground.setRotation(currentRotation);
             if (currentRotation % 60 == 0) {
                 rotationAnimator.cancel();
-
                 ObjectAnimator scaleX = ObjectAnimator.ofFloat(vv_logo_background, "scaleX", 1.2f, 1f);
                 ObjectAnimator scaleY = ObjectAnimator.ofFloat(vv_logo_background, "scaleY", 1.2f, 1f);
 
@@ -215,9 +200,8 @@ public class RegisterActivity extends AppCompatActivity {
                 scaleUp.setDuration(200);
                 scaleUp.start();
 
-                registerButton.setEnabled(true);
+                loginButton.setEnabled(true);
             }
         });
     }
-
 }

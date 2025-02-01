@@ -9,5 +9,6 @@
     <color name="cardspotbackground">?android:attr/colorBackground</color>
     <color name="gradient_start">#FD5780</color>
     <color name="gradient_end">#FF7B42</color>
+    <color name="purple_500">#6200EE</color>
 
 </resources>

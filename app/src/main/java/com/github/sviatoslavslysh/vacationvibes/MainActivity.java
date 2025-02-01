@@ -1,18 +1,17 @@
 package com.github.sviatoslavslysh.vacationvibes;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.github.sviatoslavslysh.vacationvibes.activity.LocationPermissionActivity;
 import com.github.sviatoslavslysh.vacationvibes.api.ApiClient;
-import com.github.sviatoslavslysh.vacationvibes.auth.LoginActivity;
+import com.github.sviatoslavslysh.vacationvibes.activity.LoginActivity;
 import com.github.sviatoslavslysh.vacationvibes.functionality.NavigationBarActivity;
 import com.github.sviatoslavslysh.vacationvibes.utils.LocationHelper;
 import com.github.sviatoslavslysh.vacationvibes.utils.PreferencesManager;
-import com.github.sviatoslavslysh.vacationvibes.utils.ToastManager;
 
 public class MainActivity extends AppCompatActivity {
     private LocationHelper locationHelper;
@@ -27,29 +26,34 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPermissionGranted() {
                 locationHelper.requestUserLocation();
+                proceedToApp();
             }
 
             @Override
             public void onPermissionDenied() {
-                // todo block app until user enables GPS permission
-                ToastManager.showToast(MainActivity.this, "Permission denied");
+                startBlockingActivity();
             }
         });
+    }
 
-
+    private void proceedToApp() {
         PreferencesManager preferencesManager = new PreferencesManager(this);
 
-        // checks if user is logged in or not
         if (preferencesManager.isLoggedIn()) {
             ApiClient.setAuthToken(preferencesManager.getToken());
-            Intent intent = new Intent(this, NavigationBarActivity.class);
-            startActivity(intent);
-            finish();
+            startActivity(new Intent(this, NavigationBarActivity.class));
         } else {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-            finish();
+            startActivity(new Intent(this, LoginActivity.class));
         }
+
+        finish();
+    }
+
+    private void startBlockingActivity() {
+        Intent intent = new Intent(this, LocationPermissionActivity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
     @Override

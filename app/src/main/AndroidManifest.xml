@@ -31,8 +31,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".auth.LoginActivity"></activity>
-        <activity android:name=".auth.RegisterActivity"></activity>
+        <activity android:name=".activity.LoginActivity"></activity>
+        <activity android:name=".activity.RegisterActivity"></activity>
+        <activity android:name=".activity.LocationPermissionActivity"></activity>
         <activity android:name=".functionality.NavigationBarActivity"></activity>
     </application>
 
