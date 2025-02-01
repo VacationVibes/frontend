@@ -1,13 +1,14 @@
 package com.github.sviatoslavslysh.vacationvibes.cardstack;
 
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.github.sviatoslavslysh.vacationvibes.R;
@@ -45,12 +46,18 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
             double distance = locationHelper.calculateDistanceTo(place.getLatitude(), place.getLongitude());
             holder.location.setText(String.format(Locale.US, "%.2f miles away", distance));
         }
+        int placeholderDrawableId = R.drawable.baseline_hide_image_24;
+        Drawable placeholder = ContextCompat.getDrawable(holder.itemView.getContext(), placeholderDrawableId);
+
         Glide.with(holder.image)
-                .load(place.getImages().get(0).getImageUrl())
+                .load(place.getImages() != null && !place.getImages().isEmpty() ?
+                        place.getImages().get(0).getImageUrl() : placeholder)
+                .placeholder(placeholder)
+                .error(placeholder)
                 .into(holder.image);
-        holder.itemView.setOnClickListener(v ->
-                Toast.makeText(v.getContext(), place.getId(), Toast.LENGTH_SHORT).show()
-        );
+//        holder.itemView.setOnClickListener(v ->
+//                Toast.makeText(v.getContext(), place.getId(), Toast.LENGTH_SHORT).show()
+//        );
     }
 
     public void addPlace(Place place) {
