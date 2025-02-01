@@ -74,15 +74,20 @@ public class LocationHelper {
                 Log.e("LocationHelper", "GPS is enabled");
             }
 
-            Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            if (lastKnownLocation != null) {
-                Log.d("LocationHelper", "Last known location from NETWORK_PROVIDER: " + lastKnownLocation.toString());
-                this.userLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            Location gpsLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            Location networkLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+            if (gpsLocation != null) {
+                Log.d("LocationHelper", "Last known location from GPS_PROVIDER: " + gpsLocation.toString());
+                this.userLocation = gpsLocation;
+            } else if (networkLocation != null) {
+                Log.d("LocationHelper", "Last known location from NETWORK_PROVIDER: " + networkLocation.toString());
+                this.userLocation = networkLocation;
             } else {
-                Log.d("LocationHelper", "No last known location from NETWORK_PROVIDER.");
+                Log.d("LocationHelper", "No location found from GPS_PROVIDER or NETWORK_PROVIDER");
             }
 
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 500, new LocationListener() {
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 500, new LocationListener() {
                 @Override
                 public void onLocationChanged(@NonNull Location location) {
                     System.out.println("onLocationChanged");
