@@ -25,6 +25,7 @@ import com.github.sviatoslavslysh.vacationvibes.model.HomeViewModel;
 import com.github.sviatoslavslysh.vacationvibes.model.Place;
 import com.github.sviatoslavslysh.vacationvibes.model.PlaceImageMin;
 import com.github.sviatoslavslysh.vacationvibes.repository.PlaceRepository;
+import com.github.sviatoslavslysh.vacationvibes.utils.LocationHelper;
 import com.github.sviatoslavslysh.vacationvibes.utils.PlaceCallback;
 import com.github.sviatoslavslysh.vacationvibes.utils.PreferencesManager;
 import com.github.sviatoslavslysh.vacationvibes.utils.ToastManager;
@@ -45,6 +46,7 @@ public class HomeFragment extends Fragment implements CardStackListener {
     private PlaceRepository placeRepository;
     private PreferencesManager preferencesManager;
     private HomeViewModel homeViewModel;
+    private LocationHelper locationHelper;
 
     @Nullable
     @Override
@@ -55,10 +57,11 @@ public class HomeFragment extends Fragment implements CardStackListener {
         placeRepository = ((NavigationBarActivity) requireActivity()).getPlaceRepository();
         preferencesManager = ((NavigationBarActivity) requireActivity()).getPreferencesManager();
         cardStackView = rootView.findViewById(R.id.card_stack_view);
-        adapter = new CardStackAdapter(null);
+        locationHelper = LocationHelper.getInstance(requireContext());
+        adapter = new CardStackAdapter(null, locationHelper);
 
         if (homeViewModel.isDataLoaded()) {
-            adapter = new CardStackAdapter(homeViewModel.getPlaces());
+            adapter = new CardStackAdapter(homeViewModel.getPlaces(), locationHelper);
             manager = new CardStackLayoutManager(requireContext(), HomeFragment.this);
             setupCardStackView();
         } else if (preferencesManager.isFirstOpen()) {
@@ -98,8 +101,8 @@ public class HomeFragment extends Fragment implements CardStackListener {
         List<PlaceImageMin> tutorialLeftImage = new ArrayList<>();
         tutorialLeftImage.add(new PlaceImageMin("https://i.imgur.com/TGqOLSX.png"));
 
-        adapter.addPlace(new Place("tutorialRight", "A quick tutorial", "", "", "", "Swipe to the right to like place", new ArrayList<>(), tutorialRightImage, new ArrayList<>()));
-        adapter.addPlace(new Place("tutorialLeft", "A quick tutorial", "", "", "", "Swipe to the left to dislike place", new ArrayList<>(), tutorialLeftImage, new ArrayList<>()));
+        adapter.addPlace(new Place("tutorialRight", "A quick tutorial", 0, 0, "", "Swipe to the right to like place", new ArrayList<>(), tutorialRightImage, new ArrayList<>()));
+        adapter.addPlace(new Place("tutorialLeft", "A quick tutorial", 0, 0, "", "Swipe to the left to dislike place", new ArrayList<>(), tutorialLeftImage, new ArrayList<>()));
 
         homeViewModel.setPlaces(adapter.getPlaces());
     }
@@ -131,7 +134,7 @@ public class HomeFragment extends Fragment implements CardStackListener {
             public void onError(String errorMessage) {
                 homeViewModel.setAwaitingResponse(false);
                 if (isAdded()) {
-                    ToastManager.showToast(requireActivity(), errorMessage);
+                    ToastManager.showToast(requireActivity(), "HomeFragment onError: " + errorMessage);
                 }
             }
 

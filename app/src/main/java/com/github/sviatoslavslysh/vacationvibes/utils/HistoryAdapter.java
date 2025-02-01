@@ -15,14 +15,16 @@ import com.github.sviatoslavslysh.vacationvibes.model.Place;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.Locale;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ActionViewHolder> {
 
     private ArrayList<Place> places;
+    private LocationHelper locationHelper;
 
-    public HistoryAdapter(ArrayList<Place> actions) {
+    public HistoryAdapter(ArrayList<Place> actions, LocationHelper locationHelper) {
         this.places = actions != null ? actions : new ArrayList<>();
+        this.locationHelper = locationHelper;
     }
 
     public static class ActionViewHolder extends RecyclerView.ViewHolder {
@@ -51,9 +53,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ActionVi
         Place place = places.get(position);
         holder.title.setText(place.getName());
         // todo add distance, city, reaction, image etc
-        Random random = new Random();
-        int randomNumber = random.nextInt(39) + 2;
-        holder.distance.setText(randomNumber + " miles away");
+        double distance = locationHelper.calculateDistanceTo(place.getLatitude(), place.getLongitude());
+        holder.distance.setText(String.format(Locale.US, "%.2f  miles away", distance));
         if (place.getReactions().get(0).getReaction().equals("like")) {
             holder.reactionImage.setImageResource(R.drawable.baseline_thumb_up_24);
         } else if (place.getReactions().get(0).getReaction().equals("dislike")) {

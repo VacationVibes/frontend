@@ -10,9 +10,9 @@ public class Place {
     @SerializedName("name")
     private String name;
     @SerializedName("latitude")
-    private String latitude;
+    private double latitude;
     @SerializedName("longitude")
-    private String longitude;
+    private double longitude;
 
     @SerializedName("created_at")
     private String createdAt;
@@ -28,8 +28,8 @@ public class Place {
 
     public Place(String id,
                  String name,
-                 String latitude,
-                 String longitude,
+                 double latitude,
+                 double longitude,
                  String createdAt,
                  List<PlaceTypeMin> types,
                  List<PlaceImageMin> images,
@@ -46,8 +46,8 @@ public class Place {
 
     public Place(String id,
                  String name,
-                 String latitude,
-                 String longitude,
+                 double latitude,
+                 double longitude,
                  String createdAt,
                  String note,
                  List<PlaceTypeMin> types,
@@ -81,19 +81,19 @@ public class Place {
         this.name = name;
     }
 
-    public String getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 

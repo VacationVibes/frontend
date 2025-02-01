@@ -50,4 +50,5 @@ dependencies {
     implementation(libs.cardstackview)
     implementation(libs.glide)
     implementation(libs.swiperefreshlayout)
+    implementation(libs.play.services.location)
 }

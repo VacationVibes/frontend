@@ -23,6 +23,7 @@ import com.github.sviatoslavslysh.vacationvibes.model.HistoryViewModel;
 import com.github.sviatoslavslysh.vacationvibes.model.Place;
 import com.github.sviatoslavslysh.vacationvibes.repository.PlaceRepository;
 import com.github.sviatoslavslysh.vacationvibes.utils.HistoryAdapter;
+import com.github.sviatoslavslysh.vacationvibes.utils.LocationHelper;
 import com.github.sviatoslavslysh.vacationvibes.utils.PlaceCallback;
 import com.github.sviatoslavslysh.vacationvibes.utils.PreferencesManager;
 import com.github.sviatoslavslysh.vacationvibes.utils.ToastManager;
@@ -37,6 +38,8 @@ public class HistoryFragment extends Fragment {
     private HistoryAdapter adapter;
     private RecyclerView recyclerView;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private LocationHelper locationHelper;
+
 
     @Nullable
     @Override
@@ -47,7 +50,8 @@ public class HistoryFragment extends Fragment {
         preferencesManager = new PreferencesManager(this.requireContext());
         placeRepository = ((NavigationBarActivity) requireActivity()).getPlaceRepository();
         historyViewModel = new ViewModelProvider(requireActivity()).get(HistoryViewModel.class);
-        adapter = new HistoryAdapter(new ArrayList<Place>());
+        locationHelper = LocationHelper.getInstance(requireContext());
+        adapter = new HistoryAdapter(new ArrayList<Place>(), locationHelper);
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(adapter);
@@ -117,7 +121,7 @@ public class HistoryFragment extends Fragment {
                 super.onScrolled(recyclerView, dx, dy);
 
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                if (layoutManager != null && layoutManager.findLastVisibleItemPosition() == adapter.getItemCount() - 1) {
+                if (layoutManager != null && layoutManager.findLastVisibleItemPosition() == adapter.getItemCount() - 1 && adapter.getItemCount() % 20 == 0) {
                     loadHistory();
                 }
             }
