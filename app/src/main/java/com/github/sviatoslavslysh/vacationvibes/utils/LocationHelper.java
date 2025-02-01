@@ -29,9 +29,6 @@ public class LocationHelper {
     private LocationHelper(Context context) {
         this.context = context;
         this.locationManager = (LocationManager) this.context.getSystemService(Context.LOCATION_SERVICE);
-        if (hasLocationPermission()) {
-            this.userLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        }
     }
 
     public static synchronized LocationHelper getInstance(Context context) {
@@ -80,6 +77,7 @@ public class LocationHelper {
             Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             if (lastKnownLocation != null) {
                 Log.d("LocationHelper", "Last known location from NETWORK_PROVIDER: " + lastKnownLocation.toString());
+                this.userLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             } else {
                 Log.d("LocationHelper", "No last known location from NETWORK_PROVIDER.");
             }
