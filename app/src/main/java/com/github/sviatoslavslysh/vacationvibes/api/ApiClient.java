@@ -3,9 +3,13 @@ package com.github.sviatoslavslysh.vacationvibes.api;
 import androidx.annotation.NonNull;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.ConnectionPool;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Protocol;
 import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;
@@ -19,6 +23,8 @@ public class ApiClient {
     public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                    .connectionPool(new ConnectionPool(5, 5, TimeUnit.MINUTES))
+                    .protocols(List.of(Protocol.HTTP_2, Protocol.HTTP_1_1))
                     .addInterceptor(new Interceptor() {
                         @NonNull
                         @Override
