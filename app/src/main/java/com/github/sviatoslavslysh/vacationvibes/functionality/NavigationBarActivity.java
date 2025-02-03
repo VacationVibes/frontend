@@ -56,10 +56,6 @@ public class NavigationBarActivity extends AppCompatActivity {
             return true;
         });
 
-        if (preferencesManager.isFirstOpen()) {
-            preferencesManager.setFirstOpen(false);
-        }
-
         if (savedInstanceState == null) {
             navView.setSelectedItemId(R.id.navigation_home);
         }

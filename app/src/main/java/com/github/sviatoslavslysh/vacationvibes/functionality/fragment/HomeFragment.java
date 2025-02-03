@@ -67,6 +67,8 @@ public class HomeFragment extends Fragment implements CardStackListener {
             setupCardStackView();
         } else if (preferencesManager.isFirstOpen()) {
             startTutorial();
+            preferencesManager.setFirstOpen(false);
+            loadPlaces(true);
         }
         if (!homeViewModel.isDataLoaded() && !homeViewModel.isAwaitingResponse()) {
             // do nothing if already awaiting response on another (probably already hidden) activity
@@ -111,7 +113,9 @@ public class HomeFragment extends Fragment implements CardStackListener {
     private void loadPlaces(Boolean setupLayout) {
         List<String> placeIdsArray = new ArrayList<>();
         for (Place place : homeViewModel.getPlaces()) {
-            placeIdsArray.add(place.getId());
+            if (!List.of("tutorialRight", "tutorialLeft").contains(place.getId())) {
+                placeIdsArray.add(place.getId());
+            }
         }
 
         homeViewModel.setAwaitingResponse(true);
