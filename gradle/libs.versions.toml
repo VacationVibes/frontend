@@ -2,6 +2,7 @@
 agp = "8.7.2"
 cardstackview = "2.3.4"
 converterGson = "2.9.0"
+cronetOkhttp = "0.1.0"
 glide = "4.15.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -12,6 +13,8 @@ constraintlayout = "2.2.0"
 materialVersion = "1.12.0"
 navigationFragment = "2.8.4"
 navigationUi = "2.8.4"
+okhttp = "4.10.0"
+playServicesCronet = "18.1.0"
 playServicesLocation = "21.3.0"
 retrofit = "2.9.0"
 materialTapTargetPrompt = "3.3.2"
@@ -20,16 +23,20 @@ swiperefreshlayout = "1.1.0"
 [libraries]
 cardstackview = { module = "com.github.yuyakaido:CardStackView", version.ref = "cardstackview" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
+cronet-okhttp = { module = "com.google.net.cronet:cronet-okhttp", version.ref = "cronetOkhttp" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 material-v160 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
 navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigationFragment" }
 navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version.ref = "navigationUi" }
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+play-services-cronet = { module = "com.google.android.gms:play-services-cronet", version.ref = "playServicesCronet" }
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
 retrofit2-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 material-tap-target-prompt = { group = "uk.co.samuelwall", name = "material-tap-target-prompt", version.ref = "materialTapTargetPrompt" }

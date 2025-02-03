@@ -33,7 +33,7 @@ public class NavigationBarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navbar);
 
-        placeRepository = new PlaceRepository();
+        placeRepository = new PlaceRepository(this);
         preferencesManager = new PreferencesManager(this);
         new ViewModelProvider(this).get(HomeViewModel.class);
         new ViewModelProvider(this).get(HistoryViewModel.class);

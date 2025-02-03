@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         vv_logo_foreground = findViewById(R.id.vv_logo_foreground);
 
         inputValidator = new InputValidator();
-        authRepository = new AuthRepository(new PreferencesManager(this));
+        authRepository = new AuthRepository(new PreferencesManager(this),this);
 
         loginButton = findViewById(R.id.sign_in);
         switchToRegisterText = findViewById(R.id.set_sign_up);

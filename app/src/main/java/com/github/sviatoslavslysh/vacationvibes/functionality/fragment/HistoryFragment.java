@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,6 +73,8 @@ public class HistoryFragment extends Fragment {
 
 
     public void loadHistory() {
+        long startTime = System.currentTimeMillis();
+        Log.d("loadHistory start", "loadHistory startTime " + String.valueOf(startTime));
         if (historyViewModel.isAwaitingResponse()) {  // already awaiting response
             return;
         }
@@ -82,6 +85,10 @@ public class HistoryFragment extends Fragment {
                 historyViewModel.setAwaitingResponse(false);
                 if (isAdded()) {
 //                    ToastManager.showToast(requireActivity(), "Retrieved places successfully!");
+                    long endTime = System.currentTimeMillis();
+                    Log.d("loadHistory end", "loadHistory endTime " + String.valueOf(endTime) + " (time taken " + String.valueOf(endTime - startTime) + "ms)");
+//                    ToastManager.showToast(requireActivity(), String.valueOf(endTime - startTime) + "ms");
+
                     for (Place place : places) {
                         adapter.addPlace(place);
                         historyViewModel.addPlace(place);
@@ -93,6 +100,9 @@ public class HistoryFragment extends Fragment {
             public void onError(String errorMessage) {
                 historyViewModel.setAwaitingResponse(false);
                 if (isAdded()) {
+                    long endTime = System.currentTimeMillis();
+                    Log.d("loadHistory end", "loadHistory endTime " + String.valueOf(endTime) + " (time taken " + String.valueOf(endTime - startTime) + "ms)");
+
                     ToastManager.showToast(requireActivity(), errorMessage);
                 }
             }

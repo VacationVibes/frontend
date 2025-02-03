@@ -63,7 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
         vv_logo_foreground = findViewById(R.id.vv_logo_foreground);
 
         inputValidator = new InputValidator();
-        authRepository = new AuthRepository(new PreferencesManager(this));
+        authRepository = new AuthRepository(new PreferencesManager(this), this);
         executorService = Executors.newSingleThreadExecutor();
 
         switchToLoginText.setOnClickListener(v -> switchToLogin());

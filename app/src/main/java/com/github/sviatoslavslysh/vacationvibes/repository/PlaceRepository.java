@@ -1,5 +1,7 @@
 package com.github.sviatoslavslysh.vacationvibes.repository;
 
+import android.content.Context;
+
 import com.github.sviatoslavslysh.vacationvibes.api.ApiClient;
 import com.github.sviatoslavslysh.vacationvibes.api.PlaceApiService;
 import com.github.sviatoslavslysh.vacationvibes.model.AddReactionRequest;
@@ -23,8 +25,8 @@ public class PlaceRepository {
 
     private final PlaceApiService placeApiService;
 
-    public PlaceRepository() {
-        this.placeApiService = ApiClient.createService(PlaceApiService.class);
+    public PlaceRepository(Context context) {
+        this.placeApiService = ApiClient.createService(PlaceApiService.class, context);
     }
 
     public void addReaction(String placeId, String reaction, final PlaceCallback<AddReactionResponse> placeCallback) {

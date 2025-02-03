@@ -44,7 +44,7 @@ public class ProfileFragment extends Fragment {
         dislikeCountTextView = rootView.findViewById(R.id.dislike_count);
 
         preferencesManager = new PreferencesManager(this.requireContext());
-        authRepository = new AuthRepository(new PreferencesManager(requireContext()));
+        authRepository = new AuthRepository(new PreferencesManager(requireContext()), requireContext());
         profileViewModel = new ViewModelProvider(requireActivity()).get(ProfileViewModel.class);
 
         Button logoutButton = rootView.findViewById(R.id.button_log_out);

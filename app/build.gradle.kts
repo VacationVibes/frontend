@@ -51,4 +51,8 @@ dependencies {
     implementation(libs.glide)
     implementation(libs.swiperefreshlayout)
     implementation(libs.play.services.location)
+    implementation (libs.okhttp)
+    implementation (libs.logging.interceptor)
+    implementation (libs.play.services.cronet)
+    implementation (libs.cronet.okhttp)
 }

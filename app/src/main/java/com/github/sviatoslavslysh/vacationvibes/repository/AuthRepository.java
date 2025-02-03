@@ -1,5 +1,7 @@
 package com.github.sviatoslavslysh.vacationvibes.repository;
 
+import android.content.Context;
+
 import com.github.sviatoslavslysh.vacationvibes.api.ApiClient;
 import com.github.sviatoslavslysh.vacationvibes.api.AuthApiService;
 import com.github.sviatoslavslysh.vacationvibes.model.AuthToken;
@@ -22,8 +24,8 @@ public class AuthRepository {
 
     private final AuthApiService authApiService;
     private final PreferencesManager preferencesManager;
-    public AuthRepository(PreferencesManager preferencesManager) {
-        this.authApiService = ApiClient.createService(AuthApiService.class);
+    public AuthRepository(PreferencesManager preferencesManager, Context context) {
+        this.authApiService = ApiClient.createService(AuthApiService.class, context);
         this.preferencesManager = preferencesManager;
     }
 
