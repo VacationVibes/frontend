@@ -73,12 +73,10 @@ public class HistoryFragment extends Fragment {
 
 
     public void loadHistory() {
-        long startTime = System.currentTimeMillis();
-        Log.d("loadHistory start", "loadHistory startTime " + String.valueOf(startTime));
         if (historyViewModel.isAwaitingResponse()) {  // already awaiting response
             return;
         }
-        long startTime = System.currentTimeMillis();
+        long startTime = System.nanoTime();
         Log.d("loadHistory start", "loadHistory startTime " + String.valueOf(startTime));
         historyViewModel.setAwaitingResponse(true);
         placeRepository.getReactions(historyViewModel.getOffset(), historyViewModel.getLimit(), new PlaceCallback<List<Place>>() {
@@ -87,9 +85,9 @@ public class HistoryFragment extends Fragment {
                 historyViewModel.setAwaitingResponse(false);
                 if (isAdded()) {
 //                    ToastManager.showToast(requireActivity(), "Retrieved places successfully!");
-                    long endTime = System.currentTimeMillis();
+                    long endTime = System.nanoTime();
                     Log.d("loadHistory end", "loadHistory endTime " + String.valueOf(endTime) + " (time taken " + String.valueOf(endTime - startTime) + "ms)");
-//                    ToastManager.showToast(requireActivity(), String.valueOf(endTime - startTime) + "ms");
+                    ToastManager.showToast(requireActivity(), String.valueOf(endTime - startTime) + "ms");
 
                     for (Place place : places) {
                         adapter.addPlace(place);
@@ -102,7 +100,7 @@ public class HistoryFragment extends Fragment {
             public void onError(String errorMessage) {
                 historyViewModel.setAwaitingResponse(false);
                 if (isAdded()) {
-                    long endTime = System.currentTimeMillis();
+                    long endTime = System.nanoTime();
                     Log.d("loadHistory end", "loadHistory endTime " + String.valueOf(endTime) + " (time taken " + String.valueOf(endTime - startTime) + "ms)");
 
                     ToastManager.showToast(requireActivity(), errorMessage);

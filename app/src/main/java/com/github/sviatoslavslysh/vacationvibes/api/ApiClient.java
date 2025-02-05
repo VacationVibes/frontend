@@ -66,6 +66,9 @@ public class ApiClient {
                             Response response = chain.proceed(modifiedRequest);
                             Log.d("HttpProtocol", "Protocol used: " + response.protocol());
 
+                            long endTime = System.nanoTime();
+                            Log.d("Raw response", "Raw response receive time " + String.valueOf(endTime));
+
                             return response;
                         }
                     })
