@@ -78,6 +78,8 @@ public class HistoryFragment extends Fragment {
         if (historyViewModel.isAwaitingResponse()) {  // already awaiting response
             return;
         }
+        long startTime = System.currentTimeMillis();
+        Log.d("loadHistory start", "loadHistory startTime " + String.valueOf(startTime));
         historyViewModel.setAwaitingResponse(true);
         placeRepository.getReactions(historyViewModel.getOffset(), historyViewModel.getLimit(), new PlaceCallback<List<Place>>() {
             @Override
