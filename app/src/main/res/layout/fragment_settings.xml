@@ -28,38 +28,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/themeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vv_logo_foreground"
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:text="App Theme" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/dark_card_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="132dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/vv_logo_foreground">
 
         <RadioGroup
-            android:layout_width="wrap_content"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
+            android:id="@+id/themeRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/radioButton3"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="System" />
 
             <RadioButton
                 android:id="@+id/radioButton"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="Light" />
 
             <RadioButton
                 android:id="@+id/radioButton2"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="Dark" />
         </RadioGroup>
 
     </androidx.cardview.widget.CardView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
