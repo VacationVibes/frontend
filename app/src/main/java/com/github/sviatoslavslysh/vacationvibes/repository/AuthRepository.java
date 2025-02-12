@@ -22,12 +22,15 @@ import java.io.IOException;
 
 public class AuthRepository {
 
-    private final AuthApiService authApiService;
+    private AuthApiService authApiService;
     private final PreferencesManager preferencesManager;
+    private final Context context;
+
     public AuthRepository(PreferencesManager preferencesManager, Context context) {
-        this.authApiService = ApiClient.createService(AuthApiService.class, context);
         this.preferencesManager = preferencesManager;
+        this.context = context;
     }
+
 
     public void login(String email, String password, final AuthCallback<AuthToken> authCallback) {
         LoginRequest loginRequest = new LoginRequest(email, password);

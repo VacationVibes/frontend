@@ -4,18 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--    logo -->
-<!--    <ImageView-->
-<!--        android:id="@+id/vv_logo"-->
-<!--        android:layout_width="263dp"-->
-<!--        android:layout_height="269dp"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_marginTop="47dp"-->
-<!--        android:contentDescription="@string/vv_logo"-->
-<!--        android:src="@drawable/vv_logo" />-->
-
-    <!--    logo background -->
+    <!-- Logo background -->
     <ImageView
         android:id="@+id/vv_logo_background"
         android:layout_width="263dp"
@@ -26,7 +15,7 @@
         android:contentDescription="@string/vv_logo"
         android:src="@drawable/vv_logo_background" />
 
-    <!--    logo foreground -->
+    <!-- Logo foreground -->
     <ImageView
         android:id="@+id/vv_logo_foreground"
         android:layout_width="230dp"
@@ -36,9 +25,8 @@
         android:layout_marginTop="70dp"
         android:contentDescription="@string/vv_logo"
         android:src="@drawable/vv_logo_foreground" />
-t
 
-    <!-- name -->
+    <!-- Name input -->
     <EditText
         android:id="@+id/name_label"
         android:layout_width="300dp"
@@ -58,7 +46,7 @@ t
         android:paddingEnd="10dp"
         android:textAppearance="@style/name_label" />
 
-    <!-- email -->
+    <!-- Email input -->
     <EditText
         android:id="@+id/email_label"
         android:layout_width="300dp"
@@ -78,8 +66,7 @@ t
         android:paddingEnd="10dp"
         android:textAppearance="@style/email_label" />
 
-
-    <!-- password -->
+    <!-- Password input -->
     <EditText
         android:id="@+id/password_label"
         android:layout_width="300dp"
@@ -99,8 +86,17 @@ t
         android:paddingEnd="10dp"
         android:textAppearance="@style/password_label" />
 
+    <!-- Eye icon to toggle password visibility -->
+    <ImageView
+        android:id="@+id/eye_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@id/password_label"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_eye" />
 
-    <!--    dont have account? sign up button-->
+    <!-- Switch to login screen text -->
     <TextView
         android:id="@+id/set_login"
         android:layout_width="300dp"
@@ -114,7 +110,7 @@ t
         android:textAppearance="@style/set_sign_up"
         android:translationY="-1.15sp" />
 
-    <!--    register button-->
+    <!-- Register button -->
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_register"
         android:layout_width="wrap_content"
@@ -125,8 +121,6 @@ t
         app:cardElevation="8dp"
         app:cardCornerRadius="10dp"
         app:cardBackgroundColor="@android:color/transparent">
-
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/register"
             android:layout_width="228dp"
