@@ -24,11 +24,10 @@ public class AuthRepository {
 
     private AuthApiService authApiService;
     private final PreferencesManager preferencesManager;
-    private final Context context;
 
     public AuthRepository(PreferencesManager preferencesManager, Context context) {
+        this.authApiService = ApiClient.createService(AuthApiService.class, context);
         this.preferencesManager = preferencesManager;
-        this.context = context;
     }
 
 
