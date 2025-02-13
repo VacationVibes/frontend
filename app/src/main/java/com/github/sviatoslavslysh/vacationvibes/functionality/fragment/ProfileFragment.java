@@ -48,6 +48,17 @@ public class ProfileFragment extends Fragment {
         profileViewModel = new ViewModelProvider(requireActivity()).get(ProfileViewModel.class);
 
         Button logoutButton = rootView.findViewById(R.id.button_log_out);
+        Button settingsButton = rootView.findViewById(R.id.button_settings);
+
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getParentFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new SettingsFragment())
+                        .commit();
+
+            }
+        });
         logoutButton.setOnClickListener(v -> logout());
         if (profileViewModel.getId() == null) {
             loadCurrentUser();
