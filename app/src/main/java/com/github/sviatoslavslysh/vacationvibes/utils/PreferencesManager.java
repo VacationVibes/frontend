@@ -2,13 +2,16 @@ package com.github.sviatoslavslysh.vacationvibes.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.github.sviatoslavslysh.vacationvibes.R;
+
 public class PreferencesManager {
 
     private static final String PREFS_NAME = "app_prefs";
     private static final String KEY_IS_LOGGED_IN = "is_logged_in";
     private static final String KEY_TOKEN = "token";
     private static final String FIRST_OPEN = "first_open";
-
+    private static final String THEME = "theme";
+    private static final String BUTTONSELECTED = "button";
     private final SharedPreferences sharedPreferences;
     private final SharedPreferences.Editor editor;
 
@@ -45,5 +48,22 @@ public class PreferencesManager {
     public void setFirstOpen(boolean firstOpen) {
         editor.putBoolean(FIRST_OPEN, firstOpen);
         editor.apply();
+    }
+
+    public void setTheme(String theme) {
+        editor.putString(THEME, "system");
+        editor.apply();
+    }
+
+    public void setButtonSelected(int ButtonSelected) {
+        editor.putInt(BUTTONSELECTED, ButtonSelected);
+        editor.apply();
+    }
+
+    public int getButtonSelected() {
+        return sharedPreferences.getInt(BUTTONSELECTED, R.id.SystemButton);
+    }
+    public String getTheme() {
+        return sharedPreferences.getString(THEME, "System");
     }
 }

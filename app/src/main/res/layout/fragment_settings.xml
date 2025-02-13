@@ -58,19 +58,19 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/radioButton3"
+                android:id="@+id/SystemButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="System" />
 
             <RadioButton
-                android:id="@+id/radioButton"
+                android:id="@+id/LightButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="Light" />
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/DarkButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="Dark" />

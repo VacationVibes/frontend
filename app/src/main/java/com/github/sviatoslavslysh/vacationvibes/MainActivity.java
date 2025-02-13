@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.github.sviatoslavslysh.vacationvibes.activity.LocationPermissionActivity;
 import com.github.sviatoslavslysh.vacationvibes.api.ApiClient;
@@ -38,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void proceedToApp() {
         PreferencesManager preferencesManager = new PreferencesManager(this);
+
+        if (preferencesManager.getTheme().equals("system")) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        } else if (preferencesManager.getTheme().equals("dark")) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else if (preferencesManager.getTheme().equals("light")) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
 
         if (preferencesManager.isLoggedIn()) {
             ApiClient.setAuthToken(preferencesManager.getToken());
