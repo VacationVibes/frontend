@@ -65,4 +65,8 @@
     <string name="green_tick">Green tick</string>
     <string name="dislike">Dislike</string>
     <string name="place_image_description">Image</string>
+    <string name="comments">Comments</string>
+    <string name="loch_lomond">Loch Lomond Shores</string>
+    <string name="vibrant_atm">Vibrant atmosphere and mouthwatering pizza. A must-visit for an authentic Italian dining experience.</string>
+    <string name="jake_paul">Jake Paul</string>
 </resources>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/top_gradient_background"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+<!--    Comments Title-->
+    <TextView
+        android:id="@+id/comments"
+        android:layout_width="157dp"
+        android:layout_height="53dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/comments"
+        android:textAppearance="@style/comments"
+        android:gravity="center_horizontal|center_vertical"
+        />
+<!--    Background-->
+<!--    fixme img not displaying-->
+    <View
+        android:id="@+id/comment_background"
+        android:layout_width="393dp"
+        android:layout_height="774dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="78dp"
+        android:background="@drawable/comment_background"
+        />
+<!--    Place Name-->
+    <TextView
+        android:id="@+id/loch_lomond"
+        android:layout_width="229dp"
+        android:layout_height="26dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="146dp"
+        android:text="@string/loch_lomond"
+        android:textAppearance="@style/loch_lomond"
+        android:lineSpacingExtra="1sp"
+        android:translationY="-0.6sp"
+        android:gravity="center_horizontal|top"
+        />
+<!--    Place image-->
+<!--    fixme img not displaying-->
+    <View
+        android:id="@+id/loch_lomond_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="34dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="109dp"
+        android:background="@drawable/loch_lomond"
+        />
+<!--    Comment-->
+    <TextView
+        android:id="@+id/vibrant_atm"
+        android:layout_width="346dp"
+        android:layout_height="42dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="22dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="285dp"
+        android:text="@string/vibrant_atm"
+        android:textAppearance="@style/vibrant_atm"
+        android:lineSpacingExtra="2sp"
+        android:translationY="-1.15sp"
+        android:gravity="center_horizontal|top"
+        />
+<!--    Comment Box-->
+<!--    fixme text box location-->
+    <View
+        android:id="@+id/untitled_2_"
+        android:layout_width="61dp"
+        android:layout_height="380dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="387dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="275dp"
+        android:background="@drawable/comment_box" />
+<!--    Username-->
+    <TextView
+        android:id="@+id/jake_paul"
+        android:layout_width="127dp"
+        android:layout_height="24dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="-13dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="251dp"
+        android:text="@string/jake_paul"
+        android:textAppearance="@style/jake_paul"
+        android:lineSpacingExtra="-2sp"
+        android:gravity="center_horizontal|top"
+        />
+</RelativeLayout>
