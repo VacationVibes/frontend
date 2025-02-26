@@ -14,8 +14,7 @@
         android:scaleType="centerCrop"
         android:src="@drawable/baseline_hide_image_24"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-
+        app:layout_constraintStart_toStartOf="parent" />
     <ImageView
         android:id="@+id/history_place_reaction"
         android:layout_width="35dp"
@@ -24,7 +23,7 @@
         android:scaleType="fitCenter"
         android:src="@drawable/baseline_hide_image_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/history_place_name"
