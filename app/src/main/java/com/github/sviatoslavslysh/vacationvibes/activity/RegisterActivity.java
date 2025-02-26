@@ -228,13 +228,14 @@ public class RegisterActivity extends AppCompatActivity {
         executorService = Executors.newSingleThreadExecutor();
 
         eyeIcon.setOnClickListener(v -> {
-            if (passwordEditText.getInputType() == InputType.TYPE_TEXT_VARIATION_PASSWORD) {
-                passwordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                eyeIcon.setImageResource(R.drawable.ic_eye_visible);
-            } else {
-                passwordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            if ((passwordEditText.getInputType() & InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
+                passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 eyeIcon.setImageResource(R.drawable.ic_eye);
+            } else {
+                passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                eyeIcon.setImageResource(R.drawable.ic_eye_visible);
             }
+            passwordEditText.setSelection(passwordEditText.getText().length());
         });
 
         switchToLoginText.setOnClickListener(v -> switchToLogin());

@@ -87,16 +87,18 @@
         android:textAppearance="@style/password_label" />
 
     <!-- Eye icon to toggle password visibility -->
+
+    <!-- Switch to login screen text -->
     <ImageView
         android:id="@+id/eye_icon"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_alignParentEnd="true"
         android:layout_alignTop="@id/password_label"
-        android:layout_marginEnd="16dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="69dp"
         android:src="@drawable/ic_eye" />
 
-    <!-- Switch to login screen text -->
     <TextView
         android:id="@+id/set_login"
         android:layout_width="300dp"
