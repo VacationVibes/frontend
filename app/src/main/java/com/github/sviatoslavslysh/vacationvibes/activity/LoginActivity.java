@@ -66,39 +66,39 @@ public class LoginActivity extends AppCompatActivity {
 //        loginButton.setOnClickListener(v -> sendLoginRequest());
 //
 //    }
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_login);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
 
-    preferencesManager = new PreferencesManager(this);
-    emailEditText = findViewById(R.id.email_label);
-    passwordEditText = findViewById(R.id.password_label);
-    loginButtonCardView = findViewById(R.id.card_view_sign_in);
-    vv_logo_background = findViewById(R.id.vv_logo_background);
-    vv_logo_foreground = findViewById(R.id.vv_logo_foreground);
-    loginButton = findViewById(R.id.sign_in);
-    switchToRegisterText = findViewById(R.id.set_sign_up);
-    eyeIcon = findViewById(R.id.eye_icon); // Иконка глаза
+        preferencesManager = new PreferencesManager(this);
+        emailEditText = findViewById(R.id.email_label);
+        passwordEditText = findViewById(R.id.password_label);
+        loginButtonCardView = findViewById(R.id.card_view_sign_in);
+        vv_logo_background = findViewById(R.id.vv_logo_background);
+        vv_logo_foreground = findViewById(R.id.vv_logo_foreground);
+        loginButton = findViewById(R.id.sign_in);
+        switchToRegisterText = findViewById(R.id.set_sign_up);
+        eyeIcon = findViewById(R.id.eye_icon); // Иконка глаза
 
-    inputValidator = new InputValidator();
-    authRepository = new AuthRepository(new PreferencesManager(this), this);
+        inputValidator = new InputValidator();
+        authRepository = new AuthRepository(new PreferencesManager(this), this);
 
-    // Логика показа/скрытия пароля
-    eyeIcon.setOnClickListener(v -> {
-        if ((passwordEditText.getInputType() & InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
-            passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            eyeIcon.setImageResource(R.drawable.ic_eye);
-        } else {
-            passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            eyeIcon.setImageResource(R.drawable.ic_eye_visible);
-        }
-        passwordEditText.setSelection(passwordEditText.getText().length()); // Сохранение позиции курсора
-    });
+        // Логика показа/скрытия пароля
+        eyeIcon.setOnClickListener(v -> {
+            if ((passwordEditText.getInputType() & InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
+                passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                eyeIcon.setImageResource(R.drawable.ic_eye);
+            } else {
+                passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                eyeIcon.setImageResource(R.drawable.ic_eye_visible);
+            }
+            passwordEditText.setSelection(passwordEditText.getText().length()); // Сохранение позиции курсора
+        });
 
-    switchToRegisterText.setOnClickListener(v -> switchToRegister());
-    loginButton.setOnClickListener(v -> sendLoginRequest());
-}
+        switchToRegisterText.setOnClickListener(v -> switchToRegister());
+        loginButton.setOnClickListener(v -> sendLoginRequest());
+    }
 
     private void sendLoginRequest() {
         loginButton.setEnabled(false);

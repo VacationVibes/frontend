@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
     android:padding="8dp">
 
-        <com.github.sviatoslavslysh.vacationvibes.utils.HistoryCircularImageView
-            android:id="@+id/history_place_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:contentDescription="@string/place_image_description"
-            android:scaleType="centerCrop"
-            android:layout_gravity="center"
-            android:src="@drawable/baseline_hide_image_24"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginEnd="40dp"
-            app:layout_constraintBottom_toBottomOf="parent" />
+    <com.github.sviatoslavslysh.vacationvibes.utils.HistoryCircularImageView
+        android:id="@+id/history_place_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:contentDescription="@string/place_image_description"
+        android:scaleType="centerCrop"
+        android:src="@drawable/baseline_hide_image_24"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
 
     <ImageView
         android:id="@+id/history_place_reaction"
@@ -29,38 +25,44 @@
         android:src="@drawable/baseline_hide_image_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.979"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/history_place_name"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="116dp"
         android:layout_marginTop="26dp"
-        android:fontFamily="@font/orbitron_regular"
         android:text="Action Title"
         android:textColor="#E67240"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/history_place_image"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/history_place_distance"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fontFamily="@font/orbitron_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="116dp"
         android:layout_marginTop="10dp"
-        android:text="Description"
+        android:text="miles away"
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.86"
         app:layout_constraintStart_toEndOf="@id/history_place_image"
         app:layout_constraintTop_toBottomOf="@id/history_place_name" />
 
+    <!-- Comment button for each item -->
+    <ImageButton
+        android:id="@+id/comment_button"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:contentDescription="@string/comment_button_desc"
+        android:src="@drawable/comment_outline"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintStart_toEndOf="@id/history_place_distance"
+        app:layout_constraintTop_toBottomOf="@id/history_place_name"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="7dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

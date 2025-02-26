@@ -7,6 +7,7 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="my_vibes">My Vibes</string>
+    <string name="add_comment">Add Comment</string>
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
@@ -69,4 +70,5 @@
     <string name="loch_lomond">Loch Lomond Shores</string>
     <string name="vibrant_atm">Vibrant atmosphere and mouthwatering pizza. A must-visit for an authentic Italian dining experience.</string>
     <string name="jake_paul">Jake Paul</string>
+    <string name="comment_button_desc">Comment Button\n</string>
 </resources>

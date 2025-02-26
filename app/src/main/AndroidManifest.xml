@@ -35,6 +35,7 @@
         <activity android:name=".activity.RegisterActivity"></activity>
         <activity android:name=".activity.LocationPermissionActivity"></activity>
         <activity android:name=".functionality.NavigationBarActivity"></activity>
+        <activity android:name=".activity.CommentSectionActivity"></activity>
     </application>
 
 </manifest>

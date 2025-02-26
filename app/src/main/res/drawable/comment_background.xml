@@ -1,14 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--fixme img not displaying-->
-<vector
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aapt="http://schemas.android.com/aapt"
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="393dp"
     android:height="774dp"
     android:viewportWidth="393"
     android:viewportHeight="774">
-    <group>
-        <clip-path
-            android:pathData="M0 0H393V774H0V0Z" />
-    </group>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M0,0h393v774h-393z"/>
 </vector>

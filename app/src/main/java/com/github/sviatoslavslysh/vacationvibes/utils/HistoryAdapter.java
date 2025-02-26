@@ -1,8 +1,10 @@
 package com.github.sviatoslavslysh.vacationvibes.utils;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.github.sviatoslavslysh.vacationvibes.R;
+import com.github.sviatoslavslysh.vacationvibes.activity.CommentSectionActivity;
 import com.github.sviatoslavslysh.vacationvibes.model.Place;
 
 import java.util.ArrayList;
@@ -31,6 +34,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ActionVi
         TextView title, distance;
         ImageView imageView;
         ImageView reactionImage;
+        ImageButton commentButton;
 
         public ActionViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -38,6 +42,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ActionVi
             distance = itemView.findViewById(R.id.history_place_distance);
             imageView = itemView.findViewById(R.id.history_place_image);
             reactionImage = itemView.findViewById(R.id.history_place_reaction);
+            commentButton = itemView.findViewById(R.id.comment_button);
         }
     }
 
@@ -52,14 +57,34 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ActionVi
     public void onBindViewHolder(@NonNull ActionViewHolder holder, int position) {
         Place place = places.get(position);
         holder.title.setText(place.getName());
-        // todo add distance, city, reaction, image etc
         double distance = locationHelper.calculateDistanceTo(place.getLatitude(), place.getLongitude());
-        holder.distance.setText(String.format(Locale.US, "%.2f  miles away", distance));
-        if (place.getReactions().get(0).getReaction().equals("like")) {
-            holder.reactionImage.setImageResource(R.drawable.baseline_thumb_up_24);
-        } else if (place.getReactions().get(0).getReaction().equals("dislike")) {
-            holder.reactionImage.setImageResource(R.drawable.baseline_thumb_down_24);
+        holder.distance.setText(String.format(Locale.US, "%.2f miles away", distance));
+
+        // Comment button click listener
+        holder.commentButton.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), CommentSectionActivity.class);
+            intent.putExtra("EXTRA_PLACE_TITLE", place.getName());
+            String imageUrl = "";
+            if (!place.getImages().isEmpty()) {
+                imageUrl = place.getImages().get(0).getImageUrl();
+            }
+            intent.putExtra("EXTRA_PLACE_IMAGE_URL", imageUrl);
+            // Replace with the actual user name (or pass a whole User if it's Parcelable/Serializable)
+            intent.putExtra("EXTRA_USER_NAME", "John Doe");
+            v.getContext().startActivity(intent);
+        });
+
+        // Set reaction image based on the reaction
+        if (!place.getReactions().isEmpty()) {
+            String reaction = place.getReactions().get(0).getReaction();
+            if (reaction.equals("like")) {
+                holder.reactionImage.setImageResource(R.drawable.baseline_thumb_up_24);
+            } else if (reaction.equals("dislike")) {
+                holder.reactionImage.setImageResource(R.drawable.baseline_thumb_down_24);
+            }
         }
+
+        // Load image using Glide
         if (!place.getImages().isEmpty()) {
             String imageUrl = place.getImages().get(0).getImageUrl();
             Glide.with(holder.imageView.getContext())
