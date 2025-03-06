@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -13,8 +12,9 @@
         android:contentDescription="@string/place_image_description"
         android:scaleType="centerCrop"
         android:src="@drawable/baseline_hide_image_24"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/history_place_reaction"
         android:layout_width="35dp"
@@ -29,20 +29,20 @@
         android:id="@+id/history_place_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="116dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="16dp"
         android:text="Action Title"
         android:textColor="#E67240"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/history_place_image"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/history_place_distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="116dp"
+        android:layout_marginStart="26dp"
         android:layout_marginTop="10dp"
         android:text="miles away"
         android:textColor="?android:attr/textColorPrimary"
@@ -55,13 +55,14 @@
         android:id="@+id/comment_button"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:contentDescription="@string/comment_button_desc"
-        android:src="@drawable/comment_outline"
+        android:layout_marginEnd="12dp"
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
+        android:contentDescription="@string/comment_button_desc"
         android:focusable="true"
-        app:layout_constraintStart_toEndOf="@id/history_place_distance"
-        app:layout_constraintTop_toBottomOf="@id/history_place_name"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="7dp" />
+        android:src="@drawable/comment_outline"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/history_place_reaction" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
