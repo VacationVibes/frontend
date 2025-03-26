@@ -88,6 +88,7 @@
         android:layout_height="24dp"
         android:layout_alignEnd="@+id/password_label"
         android:layout_alignTop="@id/password_label"
+        android:layout_alignBottom="@+id/password_label"
         android:layout_marginEnd="10dp"
         android:src="@drawable/ic_eye" />
 
