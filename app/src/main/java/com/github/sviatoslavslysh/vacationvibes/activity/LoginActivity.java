@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         eyeIcon = findViewById(R.id.eye_icon);
 
         inputValidator = new InputValidator();
-        authRepository = new AuthRepository(new PreferencesManager(this),this);
+        authRepository = new AuthRepository(this);
 
         eyeIcon.setOnClickListener(v -> {
             if ((passwordEditText.getInputType() & InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
