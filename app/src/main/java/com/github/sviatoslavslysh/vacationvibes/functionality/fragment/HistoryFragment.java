@@ -85,7 +85,7 @@ public class HistoryFragment extends Fragment {
                 if (isAdded()) {
                     long endTime = System.nanoTime();
                     Log.d("loadHistory end", "loadHistory endTime " + endTime + " (time taken " + (endTime - startTime) + "ms)");
-                    ToastManager.showToast(requireActivity(), (endTime - startTime) + "ms");
+//                    ToastManager.showToast(requireActivity(), (endTime - startTime) + "ms");
                     for (Place place : places) {
                         adapter.addPlace(place);
                         historyViewModel.addPlace(place);

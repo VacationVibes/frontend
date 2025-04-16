@@ -38,17 +38,22 @@ import java.security.cert.X509Certificate;
 
 public class ApiClient {
     private static final String BASE_URL = "https://nescol.uk";
+//    private static final String BASE_URL = "http://172.20.10.3:080";
     private static Retrofit retrofit;
     private static String authToken;
 
     public static Retrofit getRetrofitInstance(Context context) {
         if (retrofit == null) {
+            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY); // Логирование всех запросов и ответов
+
             CronetProviderInstaller.installProvider(context);
             CronetEngine engine = new CronetEngine.Builder(context).build();
 
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
                     .connectionPool(new ConnectionPool(5, 5, TimeUnit.MINUTES))
                     .protocols(List.of(Protocol.QUIC, Protocol.HTTP_2, Protocol.HTTP_1_1))
+                    .addInterceptor(loggingInterceptor)
                     .addInterceptor(new Interceptor() {
                         @NonNull
                         @Override

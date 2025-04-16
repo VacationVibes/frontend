@@ -4,11 +4,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.github.sviatoslavslysh.vacationvibes.R;
 import com.github.sviatoslavslysh.vacationvibes.model.Comment;
+
 import java.util.List;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentViewHolder> {
     private List<Comment> comments;
@@ -27,7 +33,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     @Override
     public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
         Comment comment = comments.get(position);
-        holder.commentText.setText(comment.getText());
+        holder.commentText.setText(comment.getComment());
+        holder.commentAuthor.setText(comment.getUser().getName());
+        holder.commentTime.setText(TimeAgo.getTimeAgo(comment.getCreatedAt()));
     }
 
     @Override
@@ -40,12 +48,20 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         notifyDataSetChanged();
     }
 
+    public List<Comment> getComments() {
+        return this.comments;
+    }
+
     static class CommentViewHolder extends RecyclerView.ViewHolder {
         TextView commentText;
+        TextView commentAuthor;
+        TextView commentTime;
 
         public CommentViewHolder(@NonNull View itemView) {
             super(itemView);
             commentText = itemView.findViewById(R.id.commentText);
+            commentAuthor = itemView.findViewById(R.id.commentAuthor);
+            commentTime = itemView.findViewById(R.id.commentTime);
         }
     }
 }

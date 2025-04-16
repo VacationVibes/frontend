@@ -1,7 +1,9 @@
 package com.github.sviatoslavslysh.vacationvibes.api;
 
+import com.github.sviatoslavslysh.vacationvibes.model.AddCommentRequest;
 import com.github.sviatoslavslysh.vacationvibes.model.AddReactionRequest;
 import com.github.sviatoslavslysh.vacationvibes.model.AddReactionResponse;
+import com.github.sviatoslavslysh.vacationvibes.model.Comment;
 import com.github.sviatoslavslysh.vacationvibes.model.Place;
 
 import java.util.List;
@@ -21,4 +23,10 @@ public interface PlaceApiService {
 
     @GET("place/feed")
     Call<List<Place>> getFeed(@Query("ignore_ids") List<String> ignoreIds);
+
+    @GET("place/comments")
+    Call<List<Comment>> getComments(@Query("place_id") String placeId);
+
+    @POST("place/comment")
+    Call<Void> addComment(@Body AddCommentRequest request);
 }

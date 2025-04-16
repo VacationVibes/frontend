@@ -27,6 +27,7 @@ import com.github.sviatoslavslysh.vacationvibes.utils.PreferencesManager;
 import com.github.sviatoslavslysh.vacationvibes.R;
 import com.github.sviatoslavslysh.vacationvibes.utils.ToastManager;
 import com.github.sviatoslavslysh.vacationvibes.utils.InputValidator;
+import com.github.sviatoslavslysh.vacationvibes.utils.UserManager;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -150,6 +151,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onSuccess(AuthToken authToken) {
                 preferencesManager.setToken(authToken.getAccessToken());
                 ApiClient.setAuthToken(authToken.getAccessToken());
+                UserManager.getInstance().loadUser(RegisterActivity.this);
 
                 // todo manage animations
                 stopAnimation();

@@ -7,6 +7,7 @@ public class ProfileViewModel extends ViewModel {
     private String email;
 
     private String id;
+    private User user;
     private boolean awaitingResponse;
     public boolean isAwaitingResponse() {
         return awaitingResponse;
@@ -14,6 +15,10 @@ public class ProfileViewModel extends ViewModel {
 
     public void setAwaitingResponse(boolean awaitingResponse) {
         this.awaitingResponse = awaitingResponse;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public String getName() {

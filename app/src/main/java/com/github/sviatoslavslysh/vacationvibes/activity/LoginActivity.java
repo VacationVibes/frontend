@@ -19,6 +19,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.github.sviatoslavslysh.vacationvibes.MainActivity;
 import com.github.sviatoslavslysh.vacationvibes.api.ApiClient;
 import com.github.sviatoslavslysh.vacationvibes.functionality.NavigationBarActivity;
 import com.github.sviatoslavslysh.vacationvibes.model.AuthToken;
@@ -28,6 +29,7 @@ import com.github.sviatoslavslysh.vacationvibes.utils.PreferencesManager;
 import com.github.sviatoslavslysh.vacationvibes.R;
 import com.github.sviatoslavslysh.vacationvibes.utils.ToastManager;
 import com.github.sviatoslavslysh.vacationvibes.utils.InputValidator;
+import com.github.sviatoslavslysh.vacationvibes.utils.UserManager;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -141,7 +143,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(AuthToken authToken) {
                 preferencesManager.setToken(authToken.getAccessToken());
                 ApiClient.setAuthToken(authToken.getAccessToken());
-
+                UserManager.getInstance().loadUser(LoginActivity.this);
                 ToastManager.showToast(LoginActivity.this, "Login successful!");
                 new Handler(Looper.getMainLooper()).postDelayed(() -> {
                     Intent intent = new Intent(LoginActivity.this, NavigationBarActivity.class);

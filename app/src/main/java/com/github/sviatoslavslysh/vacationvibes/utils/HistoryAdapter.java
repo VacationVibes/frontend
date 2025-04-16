@@ -69,8 +69,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ActionVi
                 imageUrl = place.getImages().get(0).getImageUrl();
             }
             intent.putExtra("EXTRA_PLACE_IMAGE_URL", imageUrl);
-            // Replace with the actual user name (or pass a whole User if it's Parcelable/Serializable)
-            intent.putExtra("EXTRA_USER_NAME", "John Doe");
+            UserManager userManager = UserManager.getInstance();
+            intent.putExtra("EXTRA_USER_NAME", userManager.getCurrentUser().getName());
+            intent.putExtra("EXTRA_PLACE_ID", place.getId());
             v.getContext().startActivity(intent);
         });
 

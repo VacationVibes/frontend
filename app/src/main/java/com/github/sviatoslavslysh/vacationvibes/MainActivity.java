@@ -11,14 +11,23 @@ import com.github.sviatoslavslysh.vacationvibes.activity.LocationPermissionActiv
 import com.github.sviatoslavslysh.vacationvibes.api.ApiClient;
 import com.github.sviatoslavslysh.vacationvibes.activity.LoginActivity;
 import com.github.sviatoslavslysh.vacationvibes.functionality.NavigationBarActivity;
+import com.github.sviatoslavslysh.vacationvibes.model.User;
+import com.github.sviatoslavslysh.vacationvibes.repository.AuthRepository;
+import com.github.sviatoslavslysh.vacationvibes.utils.AuthCallback;
 import com.github.sviatoslavslysh.vacationvibes.utils.LocationHelper;
 import com.github.sviatoslavslysh.vacationvibes.utils.PreferencesManager;
+import com.github.sviatoslavslysh.vacationvibes.utils.ToastManager;
+import com.github.sviatoslavslysh.vacationvibes.utils.UserManager;
 
 public class MainActivity extends AppCompatActivity {
     private LocationHelper locationHelper;
+    private UserManager userManager;
+    private AuthRepository authRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        authRepository = new AuthRepository(this);
+
         super.onCreate(savedInstanceState);
 
         // requests user's location
@@ -50,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (preferencesManager.isLoggedIn()) {
             ApiClient.setAuthToken(preferencesManager.getToken());
+            UserManager.getInstance().loadUser(this);
             startActivity(new Intent(this, NavigationBarActivity.class));
         } else {
             startActivity(new Intent(this, LoginActivity.class));
