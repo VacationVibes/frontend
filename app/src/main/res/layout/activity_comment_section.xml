@@ -16,7 +16,7 @@
         android:textAppearance="@style/comments"
         android:gravity="center"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="25dp" />
 
     <!-- Background for comments area (fixed drawable below) -->
 <!--    <View-->
