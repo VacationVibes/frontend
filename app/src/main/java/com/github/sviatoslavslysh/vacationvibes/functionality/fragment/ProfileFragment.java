@@ -65,7 +65,7 @@ public class ProfileFragment extends Fragment {
 //            startActivity(intent);
 //        });
 
-        showUser(userManager.getCurrentUser().getName());
+        showUser(userManager.getCurrentUser());
 
         return rootView;
     }
@@ -79,10 +79,9 @@ public class ProfileFragment extends Fragment {
     }
 
 
-    public void showUser(String name) {
-        userNameTextView.setText(name);
-        // todo finish
-        // likeCountTextView.setText(String.valueOf(currentUser.getLikes()));
-        // dislikeCountTextView.setText(String.valueOf(currentUser.getDislikes()));
+    public void showUser(User user) {
+        userNameTextView.setText(user.getName());
+        likeCountTextView.setText(String.valueOf(user.getLikes()));
+        dislikeCountTextView.setText(String.valueOf(user.getDislikes()));
     }
 }

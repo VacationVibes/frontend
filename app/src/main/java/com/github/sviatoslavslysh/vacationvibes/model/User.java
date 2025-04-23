@@ -4,6 +4,8 @@ public class User {
     private String id;
     private String email;
     private String name;
+    private Integer likes;
+    private Integer dislikes;
 
     public String getId() {
         return id;
@@ -27,5 +29,13 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getLikes() {
+        return likes;
+    }
+
+    public Integer getDislikes() {
+        return dislikes;
     }
 }
