@@ -41,8 +41,7 @@ public class PreferencesManager {
     }
 
     public boolean isFirstOpen() {
-        return true;
-//        return sharedPreferences.getBoolean(FIRST_OPEN, true);
+        return sharedPreferences.getBoolean(FIRST_OPEN, true);
     }
 
     public void setFirstOpen(boolean firstOpen) {

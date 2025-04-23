@@ -156,34 +156,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/card_view_log_out">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_change_password"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/sign_in"
-            android:text="Change Password"
-            android:textColor="@android:color/white" />
-    </androidx.cardview.widget.CardView>
+<!--        <androidx.appcompat.widget.AppCompatButton-->
+<!--            android:id="@+id/button_change_password"-->
+<!--            android:layout_width="200dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@drawable/sign_in"-->
+<!--            android:text="Change Password"-->
+<!--            android:textColor="@android:color/white" />-->
+<!--    </androidx.cardview.widget.CardView>-->
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_view_filter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        app:cardBackgroundColor="@android:color/transparent"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card_view_change_password">
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/card_view_filter"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        app:cardBackgroundColor="@android:color/transparent"-->
+<!--        app:cardCornerRadius="10dp"-->
+<!--        app:cardElevation="8dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/card_view_change_password">-->
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_filter"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/sign_in"
-            android:text="Filter"
-            android:textColor="@android:color/white" />
+<!--        <androidx.appcompat.widget.AppCompatButton-->
+<!--            android:id="@+id/button_filter"-->
+<!--            android:layout_width="200dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@drawable/sign_in"-->
+<!--            android:text="Filter"-->
+<!--            android:textColor="@android:color/white" />-->
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -196,7 +196,7 @@
         app:cardElevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card_view_filter">
+        app:layout_constraintTop_toBottomOf="@id/card_view_log_out">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_settings"
