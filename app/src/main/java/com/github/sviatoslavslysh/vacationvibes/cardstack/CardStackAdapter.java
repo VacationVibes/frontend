@@ -1,19 +1,23 @@
 package com.github.sviatoslavslysh.vacationvibes.cardstack;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.github.sviatoslavslysh.vacationvibes.R;
+import com.github.sviatoslavslysh.vacationvibes.activity.CommentSectionActivity;
 import com.github.sviatoslavslysh.vacationvibes.model.Place;
 import com.github.sviatoslavslysh.vacationvibes.utils.LocationHelper;
+import com.github.sviatoslavslysh.vacationvibes.utils.UserManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,9 +59,21 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
                 .placeholder(placeholder)
                 .error(placeholder)
                 .into(holder.image);
-//        holder.itemView.setOnClickListener(v ->
-//                Toast.makeText(v.getContext(), place.getId(), Toast.LENGTH_SHORT).show()
-//        );
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), CommentSectionActivity.class);
+            intent.putExtra("EXTRA_PLACE_TITLE", place.getName());
+                    String imageUrl = "";
+                    if (!place.getImages().isEmpty()) {
+                        imageUrl = place.getImages().get(0).getImageUrl();
+                    }
+                    intent.putExtra("EXTRA_PLACE_IMAGE_URL", imageUrl);
+                    UserManager userManager = UserManager.getInstance();
+                    intent.putExtra("EXTRA_USER_NAME", userManager.getCurrentUser().getName());
+                    intent.putExtra("EXTRA_PLACE_ID", place.getId());
+                    v.getContext().startActivity(intent);
+        }
+
+        );
     }
 
     public void addPlace(Place place) {

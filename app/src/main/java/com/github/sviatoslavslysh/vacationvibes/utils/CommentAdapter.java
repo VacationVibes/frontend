@@ -3,6 +3,7 @@ package com.github.sviatoslavslysh.vacationvibes.utils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,6 +37,29 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         holder.commentText.setText(comment.getComment());
         holder.commentAuthor.setText(comment.getUser().getName());
         holder.commentTime.setText(TimeAgo.getTimeAgo(comment.getCreatedAt()));
+        if (comment.getRating() == 1.0) {
+            holder.star1.setImageResource(R.drawable.ic_star_filled);
+        } else if (comment.getRating() == 2.0) {
+            holder.star1.setImageResource(R.drawable.ic_star_filled);
+            holder.star2.setImageResource(R.drawable.ic_star_filled);
+        } else if (comment.getRating() == 3.0) {
+            holder.star1.setImageResource(R.drawable.ic_star_filled);
+            holder.star2.setImageResource(R.drawable.ic_star_filled);
+            holder.star3.setImageResource(R.drawable.ic_star_filled);
+
+        } else if (comment.getRating() == 4.0) {
+            holder.star1.setImageResource(R.drawable.ic_star_filled);
+            holder.star2.setImageResource(R.drawable.ic_star_filled);
+            holder.star3.setImageResource(R.drawable.ic_star_filled);
+            holder.star4.setImageResource(R.drawable.ic_star_filled);
+
+        } else if (comment.getRating() == 5.0) {
+            holder.star1.setImageResource(R.drawable.ic_star_filled);
+            holder.star2.setImageResource(R.drawable.ic_star_filled);
+            holder.star3.setImageResource(R.drawable.ic_star_filled);
+            holder.star4.setImageResource(R.drawable.ic_star_filled);
+            holder.star5.setImageResource(R.drawable.ic_star_filled);
+        }
     }
 
     @Override
@@ -56,12 +80,18 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         TextView commentText;
         TextView commentAuthor;
         TextView commentTime;
+        ImageView star1, star2, star3, star4, star5;
 
         public CommentViewHolder(@NonNull View itemView) {
             super(itemView);
             commentText = itemView.findViewById(R.id.commentText);
             commentAuthor = itemView.findViewById(R.id.commentAuthor);
             commentTime = itemView.findViewById(R.id.commentTime);
+            star1 = itemView.findViewById(R.id.star1);
+            star2 = itemView.findViewById(R.id.star2);
+            star3 = itemView.findViewById(R.id.star3);
+            star4 = itemView.findViewById(R.id.star4);
+            star5 = itemView.findViewById(R.id.star5);
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.github.sviatoslavslysh.vacationvibes.activity;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -57,6 +58,7 @@ public class CommentSectionActivity extends AppCompatActivity {
     // Star icons (if needed)
     private ImageView star1, star2, star3, star4, star5;
     private UserManager userManager = UserManager.getInstance();
+    private double rating = 0.0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -95,10 +97,152 @@ public class CommentSectionActivity extends AppCompatActivity {
 
         // Optionally, set star icons (replace ic_star with your resource)
         star1.setImageResource(R.drawable.ic_star);
+        star1.setTag("empty");
         star2.setImageResource(R.drawable.ic_star);
+        star2.setTag("empty");
         star3.setImageResource(R.drawable.ic_star);
+        star3.setTag("empty");
         star4.setImageResource(R.drawable.ic_star);
+        star4.setTag("empty");
         star5.setImageResource(R.drawable.ic_star);
+        star5.setTag("empty");
+
+
+        star1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (star1.getTag().equals("empty")) {
+                    rating = 1.0;
+                    star1.setImageResource(R.drawable.ic_star_filled);
+                    star1.setTag("full");
+                } else {
+                    rating = 0.0;
+                    star1.setImageResource(R.drawable.ic_star);
+                    star1.setTag("empty");
+                    star2.setImageResource(R.drawable.ic_star);
+                    star2.setTag("empty");
+                    star3.setImageResource(R.drawable.ic_star);
+                    star3.setTag("empty");
+                    star4.setImageResource(R.drawable.ic_star);
+                    star4.setTag("empty");
+                    star5.setImageResource(R.drawable.ic_star);
+                    star5.setTag("empty");
+                }
+            }
+        });
+
+        star2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (star2.getTag().equals("empty")) {
+                    rating = 2.0;
+                    star1.setImageResource(R.drawable.ic_star_filled);
+                    star1.setTag("full");
+                    star2.setImageResource(R.drawable.ic_star_filled);
+                    star2.setTag("full");
+                } else {
+                    rating = 0.0;
+                    star1.setImageResource(R.drawable.ic_star);
+                    star1.setTag("empty");
+                    star2.setImageResource(R.drawable.ic_star);
+                    star2.setTag("empty");
+                    star3.setImageResource(R.drawable.ic_star);
+                    star3.setTag("empty");
+                    star4.setImageResource(R.drawable.ic_star);
+                    star4.setTag("empty");
+                    star5.setImageResource(R.drawable.ic_star);
+                    star5.setTag("empty");
+                }
+            }
+        });
+
+        star3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (star3.getTag().equals("empty")) {
+                    rating = 3.0;
+                    star1.setImageResource(R.drawable.ic_star_filled);
+                    star1.setTag("full");
+                    star2.setImageResource(R.drawable.ic_star_filled);
+                    star2.setTag("full");
+                    star3.setImageResource(R.drawable.ic_star_filled);
+                    star3.setTag("full");
+                } else {
+                    rating = 0.0;
+                    star1.setImageResource(R.drawable.ic_star);
+                    star1.setTag("empty");
+                    star2.setImageResource(R.drawable.ic_star);
+                    star2.setTag("empty");
+                    star3.setImageResource(R.drawable.ic_star);
+                    star3.setTag("empty");
+                    star4.setImageResource(R.drawable.ic_star);
+                    star4.setTag("empty");
+                    star5.setImageResource(R.drawable.ic_star);
+                    star5.setTag("empty");
+                }
+            }
+        });
+
+        star4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (star4.getTag().equals("empty")) {
+                    rating = 4.0;
+                    star1.setImageResource(R.drawable.ic_star_filled);
+                    star1.setTag("full");
+                    star2.setImageResource(R.drawable.ic_star_filled);
+                    star2.setTag("full");
+                    star3.setImageResource(R.drawable.ic_star_filled);
+                    star3.setTag("full");
+                    star4.setImageResource(R.drawable.ic_star_filled);
+                    star4.setTag("full");
+                } else {
+                    rating = 0.0;
+                    star1.setImageResource(R.drawable.ic_star);
+                    star1.setTag("empty");
+                    star2.setImageResource(R.drawable.ic_star);
+                    star2.setTag("empty");
+                    star3.setImageResource(R.drawable.ic_star);
+                    star3.setTag("empty");
+                    star4.setImageResource(R.drawable.ic_star);
+                    star4.setTag("empty");
+                    star5.setImageResource(R.drawable.ic_star);
+                    star5.setTag("empty");
+                }
+            }
+        });
+
+        star5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (star5.getTag().equals("empty")) {
+                    rating = 5.0;
+                    star1.setImageResource(R.drawable.ic_star_filled);
+                    star1.setTag("full");
+                    star2.setImageResource(R.drawable.ic_star_filled);
+                    star2.setTag("full");
+                    star3.setImageResource(R.drawable.ic_star_filled);
+                    star3.setTag("full");
+                    star4.setImageResource(R.drawable.ic_star_filled);
+                    star4.setTag("full");
+                    star5.setImageResource(R.drawable.ic_star_filled);
+                    star5.setTag("full");
+                } else {
+                    rating = 0.0;
+                    star1.setImageResource(R.drawable.ic_star);
+                    star1.setTag("empty");
+                    star2.setImageResource(R.drawable.ic_star);
+                    star2.setTag("empty");
+                    star3.setImageResource(R.drawable.ic_star);
+                    star3.setTag("empty");
+                    star4.setImageResource(R.drawable.ic_star);
+                    star4.setTag("empty");
+                    star5.setImageResource(R.drawable.ic_star);
+                    star5.setTag("empty");
+                }
+            }
+        });
+
 
         // Initialize comment repository, RecyclerView, and adapter for comments
         recyclerView = findViewById(R.id.recyclerView);
@@ -116,7 +260,7 @@ public class CommentSectionActivity extends AppCompatActivity {
                 String commentText = commentInput.getText().toString();
                 commentInput.setText("");
                 if (!commentText.isEmpty()) {
-                    AddCommentRequest addCommentRequest = new AddCommentRequest(extraPlaceId, commentText, 5.0);
+                    AddCommentRequest addCommentRequest = new AddCommentRequest(extraPlaceId, commentText, rating);
 
                     placeRepository.addComment(addCommentRequest, new PlaceCallback<Void>() {
                         @Override
@@ -126,11 +270,12 @@ public class CommentSectionActivity extends AppCompatActivity {
                             Comment comment = new Comment(
                                     "CID", "PID",
                                     userManager.getCurrentUser(),
-                                    commentText, 5.0, createdAt
+                                    commentText, rating, createdAt
                             );
                             List<Comment> currentComments = new ArrayList<>(commentAdapter.getComments());
                             currentComments.add(0, comment);
-                            commentAdapter.updateComments(currentComments);
+                            fetchComments(extraPlaceId);
+//                            commentAdapter.updateComments(currentComments);
                         }
 
                         @Override
@@ -156,6 +301,7 @@ public class CommentSectionActivity extends AppCompatActivity {
                 // Successfully fetched the comments, update the RecyclerView
                 commentAdapter = new CommentAdapter(comments);
                 recyclerView.setAdapter(commentAdapter);
+
             }
 
             @Override

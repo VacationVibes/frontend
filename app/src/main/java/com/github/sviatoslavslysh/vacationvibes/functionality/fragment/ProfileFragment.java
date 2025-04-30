@@ -50,7 +50,7 @@ public class ProfileFragment extends Fragment {
 
         Button logoutButton = rootView.findViewById(R.id.button_log_out);
         Button settingsButton = rootView.findViewById(R.id.button_settings);
-//        Button changePasswordButton = rootView.findViewById(R.id.button_change_password);
+        Button changePasswordButton = rootView.findViewById(R.id.change_password_button);
 
         settingsButton.setOnClickListener(v -> {
             getParentFragmentManager().beginTransaction()
@@ -60,10 +60,10 @@ public class ProfileFragment extends Fragment {
 
         logoutButton.setOnClickListener(v -> logout());
 
-//        changePasswordButton.setOnClickListener(v -> {
-//            Intent intent = new Intent(requireContext(), ChangePasswordActivity.class);
-//            startActivity(intent);
-//        });
+        changePasswordButton.setOnClickListener(v -> {
+            Intent intent = new Intent(requireContext(), ChangePasswordActivity.class);
+            startActivity(intent);
+        });
 
         showUser(userManager.getCurrentUser());
 
