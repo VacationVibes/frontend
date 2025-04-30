@@ -1,20 +1,26 @@
 package com.github.sviatoslavslysh.vacationvibes.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ChangePasswordRequest {
-    private String oldPassword;
+
+    @SerializedName("current_password")
+    private String currentPassword;
+
+    @SerializedName("new_password")
     private String newPassword;
 
-    public ChangePasswordRequest(String oldPassword, String newPassword) {
-        this.oldPassword = oldPassword;
+    public ChangePasswordRequest(String currentPassword, String newPassword) {
+        this.currentPassword = currentPassword;
         this.newPassword = newPassword;
     }
 
-    public String getOldPassword() {
-        return oldPassword;
+    public String getCurrentPassword() {
+        return currentPassword;
     }
 
-    public void setOldPassword(String oldPassword) {
-        this.oldPassword = oldPassword;
+    public void setCurrentPassword(String currentPassword) {
+        this.currentPassword = currentPassword;
     }
 
     public String getNewPassword() {

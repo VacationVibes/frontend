@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.github.sviatoslavslysh.vacationvibes.R;
 import com.github.sviatoslavslysh.vacationvibes.repository.AuthRepository;
 import com.github.sviatoslavslysh.vacationvibes.utils.AuthCallback;
-import com.github.sviatoslavslysh.vacationvibes.utils.PreferencesManager;
 import com.github.sviatoslavslysh.vacationvibes.utils.ToastManager;
 
 public class ChangePasswordActivity extends AppCompatActivity {
@@ -26,9 +25,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
-        PreferencesManager preferencesManager = new PreferencesManager(this); // Ensure this constructor exists
-        AuthRepository authRepository = new AuthRepository(this);
-
         authRepository = new AuthRepository(this);
 
         currentPasswordEditText = findViewById(R.id.current_password);
@@ -67,19 +63,23 @@ public class ChangePasswordActivity extends AppCompatActivity {
         if (currentPassword.isEmpty()) {
             ToastManager.showToast(this, "Please enter your current password");
             return;
-        }
-        if (newPassword.length() < 6) {
-            ToastManager.showToast(this, "New password must be at least 6 characters");
+        } else if (newPassword.isEmpty()) {
+            ToastManager.showToast(this, "Please enter your new password");
             return;
-        }
-        if (!newPassword.equals(confirmPassword)) {
+        } else if (newPassword.length() < 6 || currentPassword.length() < 6) {
+            ToastManager.showToast(this, "Password must be at least 6 characters");
+            return;
+        } else if (newPassword.length() > 511 || currentPassword.length() > 511) {
+            ToastManager.showToast(this, "Password can not be more than 511 characters");
+            return;
+        } else if (!newPassword.equals(confirmPassword)) {
             ToastManager.showToast(this, "Passwords do not match");
             return;
         }
 
-        authRepository.changePassword(currentPassword, newPassword, new AuthCallback<String>() {
+        authRepository.changePassword(currentPassword, newPassword, new AuthCallback<Void>() {
             @Override
-            public void onSuccess(String response) {
+            public void onSuccess(Void v) {
                 ToastManager.showToast(ChangePasswordActivity.this, "Password changed successfully!");
                 finish();
             }

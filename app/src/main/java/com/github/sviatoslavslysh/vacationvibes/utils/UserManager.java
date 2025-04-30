@@ -32,7 +32,6 @@ public class UserManager {
     }
 
     public void loadUser(Context context) {
-        if (currentUser != null) return;
         new AuthRepository(context).getCurrentUser(new AuthCallback<User>() {
             @Override
             public void onSuccess(User user) {
