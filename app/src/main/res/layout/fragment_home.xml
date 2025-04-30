@@ -8,10 +8,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/card_stack_view_area"
         android:layout_width="match_parent"
-        android:layout_height="648dp"
+        android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:layout_marginStart="40dp"
         app:cardElevation="0dp">
         <com.yuyakaido.android.cardstackview.CardStackView
             android:id="@+id/card_stack_view"

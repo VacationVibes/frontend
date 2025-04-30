@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.github.sviatoslavslysh.vacationvibes.R;
 import com.github.sviatoslavslysh.vacationvibes.activity.CommentSectionActivity;
 import com.github.sviatoslavslysh.vacationvibes.model.Place;
@@ -48,7 +49,11 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
             holder.location.setText(place.getNote());
         } else {  // note is empty
             double distance = locationHelper.calculateDistanceTo(place.getLatitude(), place.getLongitude());
-            holder.location.setText(String.format(Locale.US, "%.2f miles away", distance));
+            if (distance < 0) {
+                holder.location.setText("Enable GPS to see the distance to the place");
+            } else {
+                holder.location.setText(String.format(Locale.US, "%.2f miles away", distance));
+            }
         }
         int placeholderDrawableId = R.drawable.baseline_hide_image_24;
         Drawable placeholder = ContextCompat.getDrawable(holder.itemView.getContext(), placeholderDrawableId);
@@ -58,6 +63,7 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
                         place.getImages().get(0).getImageUrl() : placeholder)
                 .placeholder(placeholder)
                 .error(placeholder)
+                .transform(new RoundedCorners(50))
                 .into(holder.image);
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), CommentSectionActivity.class);

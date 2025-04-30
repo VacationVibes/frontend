@@ -50,7 +50,7 @@ public class HomeFragment extends Fragment implements CardStackListener {
     private PreferencesManager preferencesManager;
     private HomeViewModel homeViewModel;
     private LocationHelper locationHelper;
-    private User user = UserManager.getInstance().getCurrentUser();
+    private UserManager userManager = UserManager.getInstance();
 
     @Nullable
     @Override
@@ -194,11 +194,11 @@ public class HomeFragment extends Fragment implements CardStackListener {
         if (direction.equals(Direction.Left)) {
             // dislike
             reaction = "dislike";
-            user.addDislike();
+            userManager.getCurrentUser().addDislike();
         } else if (direction.equals(Direction.Right)) {
             // like
             reaction = "like";
-            user.addLike();
+            userManager.getCurrentUser().addLike();
         }
         Place currentPlace = adapter.getPlaces().get(manager.getTopPosition() - 1);
         if (currentPlace.getNote() != null) {  // ignoring tutorial cards
