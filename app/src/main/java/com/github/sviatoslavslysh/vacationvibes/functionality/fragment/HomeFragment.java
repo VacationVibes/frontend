@@ -25,11 +25,13 @@ import com.github.sviatoslavslysh.vacationvibes.model.AddReactionResponse;
 import com.github.sviatoslavslysh.vacationvibes.model.HomeViewModel;
 import com.github.sviatoslavslysh.vacationvibes.model.Place;
 import com.github.sviatoslavslysh.vacationvibes.model.PlaceImageMin;
+import com.github.sviatoslavslysh.vacationvibes.model.User;
 import com.github.sviatoslavslysh.vacationvibes.repository.PlaceRepository;
 import com.github.sviatoslavslysh.vacationvibes.utils.LocationHelper;
 import com.github.sviatoslavslysh.vacationvibes.utils.PlaceCallback;
 import com.github.sviatoslavslysh.vacationvibes.utils.PreferencesManager;
 import com.github.sviatoslavslysh.vacationvibes.utils.ToastManager;
+import com.github.sviatoslavslysh.vacationvibes.utils.UserManager;
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
 import com.yuyakaido.android.cardstackview.CardStackListener;
 import com.yuyakaido.android.cardstackview.CardStackView;
@@ -48,6 +50,7 @@ public class HomeFragment extends Fragment implements CardStackListener {
     private PreferencesManager preferencesManager;
     private HomeViewModel homeViewModel;
     private LocationHelper locationHelper;
+    private User user = UserManager.getInstance().getCurrentUser();
 
     @Nullable
     @Override
@@ -191,9 +194,11 @@ public class HomeFragment extends Fragment implements CardStackListener {
         if (direction.equals(Direction.Left)) {
             // dislike
             reaction = "dislike";
+            user.addDislike();
         } else if (direction.equals(Direction.Right)) {
             // like
             reaction = "like";
+            user.addLike();
         }
         Place currentPlace = adapter.getPlaces().get(manager.getTopPosition() - 1);
         if (currentPlace.getNote() != null) {  // ignoring tutorial cards

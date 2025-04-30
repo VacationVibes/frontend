@@ -35,7 +35,23 @@ public class User {
         return likes;
     }
 
+    public void setLikes(Integer likes) {
+        this.likes = likes;
+    }
+
+    public void addLike() {
+        this.likes = this.getLikes() + 1;
+    }
+
     public Integer getDislikes() {
         return dislikes;
+    }
+
+    public void setDislikes(Integer dislikes) {
+        this.dislikes = dislikes;
+    }
+
+    public void addDislike() {
+        this.dislikes = this.getDislikes() + 1;
     }
 }
