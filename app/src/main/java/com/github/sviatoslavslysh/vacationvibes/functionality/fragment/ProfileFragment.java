@@ -48,6 +48,7 @@ public class ProfileFragment extends Fragment {
         authRepository = new AuthRepository(requireContext());
         profileViewModel = new ViewModelProvider(requireActivity()).get(ProfileViewModel.class);
 
+        showUser(userManager.getCurrentUser());
         Button logoutButton = rootView.findViewById(R.id.button_log_out);
         Button settingsButton = rootView.findViewById(R.id.button_settings);
         Button changePasswordButton = rootView.findViewById(R.id.change_password_button);
@@ -63,9 +64,8 @@ public class ProfileFragment extends Fragment {
         changePasswordButton.setOnClickListener(v -> {
             Intent intent = new Intent(requireContext(), ChangePasswordActivity.class);
             startActivity(intent);
+            showUser(userManager.getCurrentUser());
         });
-
-        showUser(userManager.getCurrentUser());
 
         return rootView;
     }

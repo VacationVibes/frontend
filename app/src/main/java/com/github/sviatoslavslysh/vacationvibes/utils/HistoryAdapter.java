@@ -1,14 +1,19 @@
 package com.github.sviatoslavslysh.vacationvibes.utils;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.text.HtmlCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -36,6 +41,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ActionVi
         ImageView reactionImage;
         ImageButton commentButton;
 
+        ImageButton coordinates;
         public ActionViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.history_place_name);
@@ -43,6 +49,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ActionVi
             imageView = itemView.findViewById(R.id.history_place_image);
             reactionImage = itemView.findViewById(R.id.history_place_reaction);
             commentButton = itemView.findViewById(R.id.comment_button);
+            coordinates = itemView.findViewById(R.id.directions);
         }
     }
 
@@ -59,6 +66,18 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ActionVi
         holder.title.setText(place.getName());
         double distance = locationHelper.calculateDistanceTo(place.getLatitude(), place.getLongitude());
         holder.distance.setText(String.format(Locale.US, "%.2f miles away", distance));
+        holder.coordinates.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                double lat = place.getLatitude();
+                double lon = place.getLongitude();
+                String url = "http://maps.google.com/maps?z=16&t=m&q=loc:"+lat+"+"+lon;
+                Uri uri = Uri.parse(url);
+                Intent intent =  new Intent(Intent.ACTION_VIEW, uri);
+                view.getContext().startActivity(intent);
+            }
+        });
 
         // Comment button click listener
         holder.commentButton.setOnClickListener(v -> {

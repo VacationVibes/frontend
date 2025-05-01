@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.sviatoslavslysh.vacationvibes.R;
+import com.github.sviatoslavslysh.vacationvibes.functionality.fragment.ProfileFragment;
 import com.github.sviatoslavslysh.vacationvibes.repository.AuthRepository;
 import com.github.sviatoslavslysh.vacationvibes.utils.AuthCallback;
 import com.github.sviatoslavslysh.vacationvibes.utils.ToastManager;
@@ -81,7 +82,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Void v) {
                 ToastManager.showToast(ChangePasswordActivity.this, "Password changed successfully!");
-                finish();
             }
 
             @Override
