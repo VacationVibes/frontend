@@ -65,7 +65,11 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ActionVi
         Place place = places.get(position);
         holder.title.setText(place.getName());
         double distance = locationHelper.calculateDistanceTo(place.getLatitude(), place.getLongitude());
-        holder.distance.setText(String.format(Locale.US, "%.2f miles away", distance));
+        if (distance < 0) {
+            holder.distance.setText("GPS unavailable");
+        } else {
+            holder.distance.setText(String.format(Locale.US, "%.2f miles away", distance));
+        }
         holder.coordinates.setOnClickListener(new OnClickListener() {
 
             @Override
